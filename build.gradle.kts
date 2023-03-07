@@ -13,6 +13,10 @@ repositories {
     mavenCentral()
 }
 
+val sphinxVersion = "5prealpha"
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
+    implementation("net.sf.phat:sphinx4-core:$sphinxVersion")
+    implementation("net.sf.phat:sphinx4-data:$sphinxVersion")
 }
