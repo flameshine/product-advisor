@@ -39,7 +39,7 @@ public class RecognizerImpl implements Recognizer {
                 return result.toString();
             }
 
-            result.append(hypothesis);
+            result.append(hypothesis).append(" ");
         }
     }
 }

@@ -17,6 +17,7 @@ import edu.cmu.sphinx.api.Configuration;
 public class Application {
 
     private final String acousticModel;
+    private final String languageModel;
     private final String dictionaryPath;
     private final String grammarPath;
     private final String grammarName;
@@ -24,11 +25,13 @@ public class Application {
     @Autowired
     public Application(
         @Value("${recognition.acoustic.model}") String acousticModel,
+        @Value("${recognition.language.model}") String languageModel,
         @Value("${recognition.dictionary.path}") String dictionaryPath,
         @Value("${recognition.grammar.path}") String grammarPath,
         @Value("${recognition.grammar.name}") String grammarName
     ) {
         this.acousticModel = acousticModel;
+        this.languageModel = languageModel;
         this.dictionaryPath = dictionaryPath;
         this.grammarPath = grammarPath;
         this.grammarName = grammarName;
@@ -49,6 +52,7 @@ public class Application {
         var configuration = new Configuration();
 
         configuration.setAcousticModelPath(acousticModel);
+        configuration.setLanguageModelPath(languageModel);
         configuration.setDictionaryPath(dictionaryPath);
         configuration.setGrammarPath(grammarPath);
         configuration.setGrammarName(grammarName);
