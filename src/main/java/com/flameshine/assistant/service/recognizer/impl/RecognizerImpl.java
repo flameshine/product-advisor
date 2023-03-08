@@ -1,4 +1,4 @@
-package com.flameshine.assistant.recognizer;
+package com.flameshine.assistant.service.recognizer.impl;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Port;
@@ -6,6 +6,8 @@ import javax.sound.sampled.Port;
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.flameshine.assistant.service.recognizer.Recognizer;
 
 @Service
 public class RecognizerImpl implements Recognizer {
