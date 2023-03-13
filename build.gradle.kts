@@ -14,10 +14,16 @@ repositories {
 }
 
 val sphinxVersion = "5prealpha"
+val lombokVersion = "1.18.22"
 
 dependencies {
+
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("net.sf.phat:sphinx4-core:$sphinxVersion")
     implementation("net.sf.phat:sphinx4-data:$sphinxVersion")
+
+    compileOnly("org.projectlombok:lombok:$lombokVersion")
+
+    annotationProcessor("org.projectlombok:lombok:$lombokVersion")
 }

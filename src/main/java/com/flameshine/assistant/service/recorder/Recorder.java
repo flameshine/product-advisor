@@ -1,7 +1,15 @@
 package com.flameshine.assistant.service.recorder;
 
-import java.io.File;
-
 public interface Recorder {
-    File record();
+
+    /**
+     * Starts the recording.
+     * @return A string, specifies the path with the output.
+     */
+    String start(long recordingTimeMillis);
+
+    /**
+     * Stops the recording.
+     */
+    void stop();
 }

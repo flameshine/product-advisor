@@ -3,6 +3,7 @@ package com.flameshine.assistant.configuration;
 import java.io.IOException;
 
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
+import edu.cmu.sphinx.api.StreamSpeechRecognizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -33,8 +34,8 @@ public class RecognizerConfiguration {
     }
 
     @Bean
-    public LiveSpeechRecognizer liveSpeechRecognizer() throws IOException {
-        return new LiveSpeechRecognizer(configuration());
+    public StreamSpeechRecognizer liveSpeechRecognizer() throws IOException {
+        return new StreamSpeechRecognizer(configuration());
     }
 
     @Bean
