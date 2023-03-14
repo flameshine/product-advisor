@@ -1,12 +1,12 @@
 package com.flameshine.assistant.service.recorder;
 
-public interface Recorder {
+public interface RecorderService {
 
     /**
      * Starts the recording.
      * @return A string, specifies the path with the output.
      */
-    String start(long recordingTimeMillis);
+    String start();
 
     /**
      * Stops the recording.
