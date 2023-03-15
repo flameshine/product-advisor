@@ -8,7 +8,7 @@
     <form th:action="@{/home}" method="get">
         <button type="submit" th:name="action" th:value="start">Start</button>
     </form>
-    <form th:action="@{/home(action='stop')}" method="get">
+    <form th:action="@{/home}" method="get">
         <button type="submit" th:name="action" th:value="stop">Stop</button>
     </form>
 </div>
