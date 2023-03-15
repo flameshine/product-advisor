@@ -3,26 +3,22 @@ package com.flameshine.assistant.service.recognizer.impl;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.UncheckedIOException;
 
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 import edu.cmu.sphinx.api.StreamSpeechRecognizer;
 import edu.cmu.sphinx.api.SpeechResult;
 import lombok.extern.slf4j.Slf4j;
+import lombok.AllArgsConstructor;
 
 import com.flameshine.assistant.service.recognizer.Recognizer;
+import com.flameshine.assistant.util.LoggingUtils;
 
 @Service
 @Slf4j
+@AllArgsConstructor
 public class RecognizerImpl implements Recognizer {
 
     private final StreamSpeechRecognizer recognizer;
-
-    @Autowired
-    public RecognizerImpl(StreamSpeechRecognizer recognizer) {
-        this.recognizer = recognizer;
-    }
 
     @Override
     public String recognize(File input) {
@@ -41,9 +37,11 @@ public class RecognizerImpl implements Recognizer {
             }
 
         } catch (IOException e) {
-            var message = String.format("Unable to recognize speech from input file: %s", input);
-            log.error(message);
-            throw new UncheckedIOException(message, e);
+
+            LoggingUtils.logErrorAndThrowRuntimeException(
+                String.format("Unable to recognize speech from input file: %s", input)
+            );
+
         } finally {
             recognizer.stopRecognition();
         }

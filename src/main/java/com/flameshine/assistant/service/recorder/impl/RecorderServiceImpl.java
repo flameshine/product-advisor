@@ -1,40 +1,48 @@
 package com.flameshine.assistant.service.recorder.impl;
 
-import javax.sound.sampled.*;
+import java.nio.file.Path;
+import java.util.concurrent.*;
 
-import org.springframework.stereotype.Service;
+import javax.sound.sampled.AudioFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 
 import com.flameshine.assistant.service.recorder.RecorderService;
+import com.flameshine.assistant.util.LoggingUtils;
 
-// TODO: figure out with silence in all voices
-// TODO: review exception throwing policy
-// TODO: let users record voices concurrently
-// TODO: add an ability to construct path based on user data
-// TODO: review -> prettify the code
+// TODO: add an ability for concurrent executions
 
 @Service
 @Slf4j
 public class RecorderServiceImpl implements RecorderService {
 
-    private final String path;
     private final Recorder recorder;
 
     @Autowired
     public RecorderServiceImpl(AudioFormat format) {
-        this.path = "/tmp/recording.wav";
-        this.recorder = new Recorder(format, path);
+        this.recorder = new Recorder(format);
     }
 
     @Override
-    public String start() {
+    public Path start() {
 
-        var recordingThread = new Thread(recorder);
+        Path result = null;
 
-        recordingThread.start();
+        try {
 
-        return path;
+            result = CompletableFuture.supplyAsync(recorder)
+                .get(30, TimeUnit.SECONDS);
+
+        } catch (ExecutionException | InterruptedException e) {
+            Thread.currentThread().interrupt();
+            LoggingUtils.logErrorAndThrowRuntimeException("Unable to retrieve the recording result path", e);
+        } catch (TimeoutException e) {
+            LoggingUtils.logErrorAndThrowRuntimeException("Maximum recording time (30 seconds) exceeded", e);
+        }
+
+        return result;
     }
 
     @Override
