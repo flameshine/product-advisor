@@ -1,10 +1,9 @@
 package com.flameshine.assistant.service.recognizer.impl;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import edu.cmu.sphinx.api.StreamSpeechRecognizer;
 import edu.cmu.sphinx.api.SpeechResult;
 import lombok.extern.slf4j.Slf4j;
@@ -21,11 +20,11 @@ public class RecognizerImpl implements Recognizer {
     private final StreamSpeechRecognizer recognizer;
 
     @Override
-    public String recognize(File input) {
+    public String recognize(MultipartFile recording) {
 
         var result = new StringBuilder();
 
-        try (var stream = new FileInputStream(input)) {
+        try (var stream = recording.getInputStream()) {
 
             recognizer.startRecognition(stream);
 
@@ -39,7 +38,7 @@ public class RecognizerImpl implements Recognizer {
         } catch (IOException e) {
 
             LoggingUtils.logErrorAndThrowRuntimeException(
-                String.format("Unable to recognize speech from input file: %s", input)
+                String.format("Unable to recognize speech from input file: %s", recording)
             );
 
         } finally {

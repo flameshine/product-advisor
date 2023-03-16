@@ -1,16 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <title>Assistant</title>
 </head>
 <body>
-<div class="container">
-    <form th:action="@{/home}" method="get">
-        <button type="submit" th:name="action" th:value="start">Start</button>
-    </form>
-    <form th:action="@{/home}" method="get">
-        <button type="submit" th:name="action" th:value="stop">Stop</button>
-    </form>
+<div>
+    <button id="startButton">Start</button>
+    <button id="stopButton">Stop</button>
 </div>
+<script type="text/javascript" src="/js/recorder.js"></script>
 </body>
 </html>
