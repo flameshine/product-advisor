@@ -34,8 +34,6 @@ stopButton.addEventListener("click", () => {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
 
-    recordedChunks = []
-
     link.href = url;
     link.download = 'recording.wav';
 
