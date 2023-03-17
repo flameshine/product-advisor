@@ -2,7 +2,8 @@
 
 grammar grammar;
 
-public <stop> = (stop);
 public <one> = (one);
 public <two> = (two);
 public <three> = (three);
+public <four> = (four);
+public <five> = (five);

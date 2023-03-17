@@ -1,10 +1,10 @@
-const startButton = document.getElementById("startButton");
-const stopButton = document.getElementById("stopButton");
+const startButton = document.getElementById('startButton');
+const stopButton = document.getElementById('stopButton');
 
 let mediaRecorder;
 let recordedChunks = [];
 
-startButton.addEventListener("click", () => {
+startButton.addEventListener('click', () => {
 
     recordedChunks = [];
 
@@ -24,25 +24,19 @@ startButton.addEventListener("click", () => {
     stopButton.disabled = false;
 });
 
-// TODO: should push data to API for further processing
-
-stopButton.addEventListener("click", () => {
+stopButton.addEventListener('click', () => {
 
     mediaRecorder.stop();
 
     const blob = new Blob(recordedChunks, { type: 'audio/wav' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+    const data = new FormData();
 
-    recordedChunks = []
+    data.append('recording', blob, 'recording.wav');
 
-    link.href = url;
-    link.download = 'recording.wav';
-
-    document.body.appendChild(link);
-
-    link.click();
-
-    startButton.disabled = false;
-    stopButton.disabled = true;
+    fetch('/recognize', {
+        method: 'POST',
+        body: data
+    }).then(() => {
+        location.href = '/result'
+    })
 });
