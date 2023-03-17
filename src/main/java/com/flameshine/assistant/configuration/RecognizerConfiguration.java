@@ -2,7 +2,6 @@ package com.flameshine.assistant.configuration;
 
 import java.io.IOException;
 
-import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 import edu.cmu.sphinx.api.StreamSpeechRecognizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

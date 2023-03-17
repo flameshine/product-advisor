@@ -1,7 +1,7 @@
 package com.flameshine.assistant.service.recognizer;
 
-import org.springframework.web.multipart.MultipartFile;
+import java.io.File;
 
 public interface Recognizer {
-    String recognize(MultipartFile recording);
+    String recognize(File recording);
 }

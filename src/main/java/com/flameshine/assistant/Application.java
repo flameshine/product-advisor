@@ -3,7 +3,8 @@ package com.flameshine.assistant;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.SpringApplication;
 
-// TODO: implement a web part & provision a database
+// TODO: provision a database to store product names to match
+// TODO: implement more efficient way to convert audio files
 
 @SpringBootApplication
 public class Application {

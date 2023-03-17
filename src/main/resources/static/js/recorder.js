@@ -11,7 +11,7 @@ startButton.addEventListener('click', () => {
     navigator.mediaDevices.getUserMedia({ audio: true })
         .then(stream => {
 
-            mediaRecorder = new MediaRecorder(stream);
+            mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm' });
 
             mediaRecorder.ondataavailable = (event) => {
                 recordedChunks.push(event.data);
@@ -28,10 +28,10 @@ stopButton.addEventListener('click', () => {
 
     mediaRecorder.stop();
 
-    const blob = new Blob(recordedChunks, { type: 'audio/wav' });
+    const blob = new Blob(recordedChunks, { type: 'audio/webm' });
     const data = new FormData();
 
-    data.append('recording', blob, 'recording.wav');
+    data.append('recording', blob, 'recording.webm');
 
     fetch('/recognize', {
         method: 'POST',
