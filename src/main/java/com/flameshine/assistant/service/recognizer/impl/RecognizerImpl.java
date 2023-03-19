@@ -1,11 +1,12 @@
 package com.flameshine.assistant.service.recognizer.impl;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import edu.cmu.sphinx.api.StreamSpeechRecognizer;
 import edu.cmu.sphinx.api.SpeechResult;
 import lombok.AllArgsConstructor;
@@ -19,19 +20,20 @@ public class RecognizerImpl implements Recognizer {
     private final StreamSpeechRecognizer recognizer;
 
     @Override
-    public String recognize(File recording) {
+    public String recognize(MultipartFile recording) {
 
-        var result = new StringBuilder();
+        List<String> hypotheses = new LinkedList<>();
 
-        try (var stream = new FileInputStream(recording)) {
+        try (var stream = recording.getInputStream()) {
 
             recognizer.startRecognition(stream);
 
             SpeechResult speechResult;
 
             while ((speechResult = recognizer.getResult()) != null) {
-                var hypothesis = speechResult.getHypothesis();
-                result.append(hypothesis).append(" ");
+                hypotheses.add(
+                    speechResult.getHypothesis()
+                );
             }
 
         } catch (IOException e) {
@@ -40,6 +42,6 @@ public class RecognizerImpl implements Recognizer {
             recognizer.stopRecognition();
         }
 
-        return result.toString();
+        return String.join(" ", hypotheses);
     }
 }

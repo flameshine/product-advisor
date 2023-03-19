@@ -10,12 +10,7 @@ version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
-
     mavenCentral()
-
-    maven {
-        url = uri("https://www.dcm4che.org/maven2")
-    }
 }
 
 val sphinxVersion = "5prealpha"
@@ -28,7 +23,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("net.sf.phat:sphinx4-core:$sphinxVersion")
     implementation("net.sf.phat:sphinx4-data:$sphinxVersion")
-    implementation("xuggle:xuggle-xuggler:5.4")
 
     compileOnly("org.projectlombok:lombok:$lombokVersion")
 
