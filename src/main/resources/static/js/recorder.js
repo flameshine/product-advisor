@@ -1,5 +1,12 @@
 import { webmToWav } from './converter.js'
 
+/**
+ * We have to assign each window a unique UUID in order to support multiple users recording audios at the same time.
+ */
+window.onload = () => {
+    window.name = crypto.randomUUID();
+}
+
 const startButton = document.getElementById('startButton');
 const stopButton = document.getElementById('stopButton');
 
@@ -45,8 +52,15 @@ stopButton.addEventListener('click', () => {
             fetch('/recognize', {
                 method: 'POST',
                 body: data
-            }).then(() => {
-                location.href = '/result'
+            }).then((response) => {
+                response.text()
+                    .then((body) => {
+                        const text = document.createTextNode(body);
+                        document.body.appendChild(text);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
             })
         })
         .catch((error) => {
