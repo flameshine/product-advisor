@@ -10,6 +10,12 @@ window.onload = () => {
 const startButton = document.getElementById('startButton');
 const stopButton = document.getElementById('stopButton');
 
+const audioFormatProperties = {
+    autoGainControl: false,
+    echoCancellation: false,
+    noiseSuppression: false
+};
+
 let mediaRecorder;
 let recordedChunks = [];
 
@@ -17,7 +23,7 @@ startButton.addEventListener('click', () => {
 
     recordedChunks = [];
 
-    navigator.mediaDevices.getUserMedia({ audio: true })
+    navigator.mediaDevices.getUserMedia({ audio: audioFormatProperties })
         .then(stream => {
 
             mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm' });
