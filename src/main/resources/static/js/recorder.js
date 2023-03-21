@@ -55,8 +55,11 @@ stopButton.addEventListener('click', () => {
             }).then((response) => {
                 response.text()
                     .then((body) => {
+                        const container = document.createElement('div');
+                        container.setAttribute('class', 'text-center');
                         const text = document.createTextNode(body);
-                        document.body.appendChild(text);
+                        container.appendChild(text);
+                        document.body.appendChild(container);
                     })
                     .catch((error) => {
                         console.log(error);
