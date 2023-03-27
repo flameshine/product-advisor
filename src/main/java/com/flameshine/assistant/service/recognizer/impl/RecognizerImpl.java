@@ -2,6 +2,7 @@ package com.flameshine.assistant.service.recognizer.impl;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,9 +21,9 @@ public class RecognizerImpl implements Recognizer {
     private final StreamSpeechRecognizer recognizer;
 
     @Override
-    public String recognize(MultipartFile recording) {
+    public List<String> recognize(MultipartFile recording) {
 
-        List<String> hypotheses = new LinkedList<>();
+        List<String> keywords = new LinkedList<>();
 
         try (var stream = recording.getInputStream()) {
 
@@ -31,9 +32,7 @@ public class RecognizerImpl implements Recognizer {
             SpeechResult speechResult;
 
             while ((speechResult = recognizer.getResult()) != null) {
-                hypotheses.add(
-                    speechResult.getHypothesis()
-                );
+                keywords.add(speechResult.getHypothesis());
             }
 
         } catch (IOException e) {
@@ -42,6 +41,6 @@ public class RecognizerImpl implements Recognizer {
             recognizer.stopRecognition();
         }
 
-        return String.join(" ", hypotheses);
+        return Collections.unmodifiableList(keywords);
     }
 }
