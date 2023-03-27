@@ -24,6 +24,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("net.sf.phat:sphinx4-core:$sphinxVersion")
     implementation("net.sf.phat:sphinx4-data:$sphinxVersion")
+    implementation("mysql:mysql-connector-java:8.0.32")
 
     compileOnly("org.projectlombok:lombok:$lombokVersion")
 

@@ -11,6 +11,7 @@ import com.flameshine.assistant.repository.ProductRepository;
 import com.flameshine.assistant.service.retriever.ProductRetriever;
 
 // TODO: consider using one SQL query that will search for all matches in the list instead of performing multiple queries one by one
+// TODO: investigate recognition mismatches
 
 @Service
 @AllArgsConstructor
@@ -21,7 +22,8 @@ public class ProductRetrieverImpl implements ProductRetriever {
     @Override
     public Optional<Product> retrieve(List<String> keywords) {
         return keywords.stream()
-            .map(repository::findByName)
-            .findFirst();
+            .map(repository::findByNameIgnoreCase)
+            .findFirst()
+            .orElseGet(Optional::empty);
     }
 }
