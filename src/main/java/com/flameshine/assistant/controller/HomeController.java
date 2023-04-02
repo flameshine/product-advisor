@@ -3,13 +3,13 @@ package com.flameshine.assistant.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.flameshine.assistant.util.Constants;
+
 @Controller
 public class HomeController {
 
-    private static final String HOME_PATH = "/home";
-
-    @GetMapping({ "/", HOME_PATH })
+    @GetMapping({ "/", Constants.HOME_PATH })
     public String home() {
-        return HOME_PATH;
+        return Constants.HOME_PATH;
     }
 }

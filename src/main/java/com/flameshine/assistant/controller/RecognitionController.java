@@ -4,27 +4,27 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-import com.flameshine.assistant.model.Product;
-import com.flameshine.assistant.service.recognizer.Recognizer;
-import com.flameshine.assistant.service.retriever.ProductRetriever;
+import com.flameshine.assistant.service.Recognizer;
+import com.flameshine.assistant.service.Matcher;
+import com.flameshine.assistant.util.Constants;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class RecognitionController {
 
     private final Recognizer recognizer;
-    private final ProductRetriever retriever;
+    private final Matcher<?> retriever;
 
-    @PostMapping("/recognize")
+    @PostMapping(Constants.RECOGNITION_PATH)
     public String recognize(
         @RequestParam("recording") MultipartFile recording
     ) {
         var keywords = recognizer.recognize(recording);
 
-        return retriever.retrieve(keywords)
-            .map(Product::toString)
-            .orElse("No matching products found");
+        return retriever.match(keywords)
+            .map(Object::toString)
+            .orElse("No matching items found");
     }
 }

@@ -1,4 +1,4 @@
-package com.flameshine.assistant.service.recognizer.impl;
+package com.flameshine.assistant.service.impl;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import edu.cmu.sphinx.api.StreamSpeechRecognizer;
 import edu.cmu.sphinx.api.SpeechResult;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-import com.flameshine.assistant.service.recognizer.Recognizer;
+import com.flameshine.assistant.service.Recognizer;
 
 @Service
-@AllArgsConstructor
-public class RecognizerImpl implements Recognizer {
+@RequiredArgsConstructor
+public class Sphinx4Recognizer implements Recognizer {
 
     private final StreamSpeechRecognizer recognizer;
 

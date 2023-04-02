@@ -1,4 +1,4 @@
-package com.flameshine.assistant.service.recognizer;
+package com.flameshine.assistant.service;
 
 import java.util.List;
 

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import lombok.extern.slf4j.Slf4j;
 
+import com.flameshine.assistant.util.Constants;
+
 @ControllerAdvice
 @Slf4j
 public class ErrorController {
@@ -17,7 +19,7 @@ public class ErrorController {
 
         log.error("An unhandled exception has occurred", e);
 
-        return new ModelAndView("/error")
+        return new ModelAndView(Constants.ERROR_PATH)
             .addObject("message", e.getMessage());
     }
 }

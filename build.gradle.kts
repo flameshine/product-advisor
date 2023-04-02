@@ -18,9 +18,10 @@ val lombokVersion = "1.18.26"
 
 dependencies {
 
-    implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("net.sf.phat:sphinx4-core:$sphinxVersion")
     implementation("net.sf.phat:sphinx4-data:$sphinxVersion")
