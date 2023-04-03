@@ -13,6 +13,7 @@ import com.flameshine.assistant.service.Matcher;
 
 // TODO: consider using one SQL query that will search for all matches in the list instead of performing multiple queries one by one
 // TODO: investigate recognition mismatches
+// TODO: return all matched products
 
 @Service
 @Transactional

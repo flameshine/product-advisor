@@ -37,7 +37,7 @@ public class SecurityConfiguration {
             .and()
             .formLogin()
             .loginPage(Constants.LOGIN_PATH)
-            .defaultSuccessUrl(Constants.HOME_PATH)
+            .defaultSuccessUrl(Constants.RECOGNITION_PATH)
             .permitAll()
             .and()
             .logout()

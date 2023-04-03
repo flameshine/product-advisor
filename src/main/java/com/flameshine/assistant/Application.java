@@ -4,7 +4,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.SpringApplication;
 
 // TODO: implement more efficient way to convert audio files
-// TODO: finalize authentication mechanism
 
 @SpringBootApplication
 public class Application {

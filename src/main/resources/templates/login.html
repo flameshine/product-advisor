@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="~{/fragments/header :: header}"/>
+</head>
+<body>
+<div th:replace="~{/fragments/navigation-bar :: navigation-bar}"/>
+<div class="container">
+    <div class="alert alert-dark" th:if="${message}" th:utext="${message}"/>
+    <div class="row">
+        <div class="col col-sm-8 col-md-6">
+            <form th:action="@{/login}" method="post">
+                <fieldset>
+                    <div th:if="${param.error}">
+                        <div class="alert alert-danger">Invalid credentials</div>
+                    </div>
+                    <div th:if="${param.logout}">
+                        <div class="alert alert-dark">You've been logged out successfully</div>
+                    </div>
+                    <div class="form-label">
+                        <input class="form-control" type="text" name="username" id="username" placeholder="Username" required autofocus/>
+                    </div>
+                    <div class="form-label">
+                        <input class="form-control" type="password" name="password" id="password" placeholder="Password" required/>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <input class="btn btn-dark" type="submit" value="Submit"/>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+<div th:replace="~{/fragments/footer :: footer}"/>
+</body>
+</html>
