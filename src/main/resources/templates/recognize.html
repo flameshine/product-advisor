@@ -6,12 +6,12 @@
 <body>
 <div th:replace="~{/fragments/navigation-bar :: navigation-bar}"/>
 <div class="container">
-    <div class="text-center">
-        <button id="startButton">Start</button>
-        <button id="stopButton">Stop</button>
+    <div id="recorder" class="d-flex justify-content-center align-items-center">
+        <button class="btn btn-dark p-2" id="startButton">Start</button>
+        <button class="btn btn-dark p-2" id="stopButton">Stop</button>
     </div>
 </div>
-<!-- External import maps aren't yet supported-->
+<!-- External import maps aren't yet supported -->
 <script type="importmap">
 {
   "imports": {

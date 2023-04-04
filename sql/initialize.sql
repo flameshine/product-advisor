@@ -28,6 +28,6 @@ CREATE TABLE product(
 
 INSERT INTO user VALUES(1, 'user', 'user@user.com', '$2a$10$GmsBUqRWMVp79KyJfZLD5eKyQ3XnAF5SN0ZG.Y8roKURKzgVh5vJG', 'user', 'user');
 
-INSERT INTO product VALUES(1, 'Phone', 1500, 'USD', 'Modern smartphone', 5);
-INSERT INTO product VALUES(2, 'Tablet', 3000, 'USD', 'Cutting-edge tablet', 5);
-INSERT INTO product VALUES(3, 'Laptop', 4500, 'USD', 'Avant-garde laptop', 5);
+INSERT INTO product VALUES(1, 'Phone', 'Modern smartphone', 1500, 'USD', 5);
+INSERT INTO product VALUES(2, 'Tablet', 'Cutting-edge tablet', 3000, 'USD', 5);
+INSERT INTO product VALUES(3, 'Laptop', 'Avant-garde laptop', 4500, 'USD', 5);

@@ -30,6 +30,8 @@ public class SecurityConfiguration {
         return http.csrf()
             .disable()
             .authorizeHttpRequests()
+            .requestMatchers("/css/**", "/js/**")
+            .permitAll()
             .requestMatchers(Constants.REGISTRATION_PATH, Constants.ERROR_PATH)
             .permitAll()
             .anyRequest()
