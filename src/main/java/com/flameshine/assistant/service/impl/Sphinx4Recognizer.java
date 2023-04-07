@@ -32,7 +32,7 @@ public class Sphinx4Recognizer implements Recognizer {
             SpeechResult speechResult;
 
             while ((speechResult = recognizer.getResult()) != null) {
-                keywords.add(speechResult.getHypothesis());
+                keywords.add(speechResult.getHypothesis().toLowerCase());
             }
 
         } catch (IOException e) {

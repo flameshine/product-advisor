@@ -14,7 +14,7 @@ import com.flameshine.assistant.util.Constants;
 public class RecognitionController {
 
     private final Recognizer recognizer;
-    private final Matcher<?> retriever;
+    private final Matcher<?> matcher;
 
     @GetMapping({ "/", Constants.RECOGNITION_PATH })
     public String recognize() {
@@ -27,9 +27,12 @@ public class RecognitionController {
         @RequestParam("recording") MultipartFile recording
     ) {
         var keywords = recognizer.recognize(recording);
+        var matched = matcher.match(keywords);
 
-        return retriever.match(keywords)
-            .map(Object::toString)
-            .orElse("No matching items found");
+        if (matched.isEmpty()) {
+            return "No matching items found";
+        }
+
+        return matched.toString();
     }
 }
