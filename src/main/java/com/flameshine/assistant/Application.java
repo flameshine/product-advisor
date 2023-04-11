@@ -3,7 +3,8 @@ package com.flameshine.assistant;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.SpringApplication;
 
-// TODO: implement more efficient way to convert audio files
+// TODO: investigate recognition mismatches
+// TODO: add recording visualization
 
 @SpringBootApplication
 public class Application {

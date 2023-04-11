@@ -10,8 +10,6 @@ import com.flameshine.assistant.repository.ProductRepository;
 import com.flameshine.assistant.entity.Product;
 import com.flameshine.assistant.service.Matcher;
 
-// TODO: investigate recognition mismatches
-
 @Service
 @Transactional
 @RequiredArgsConstructor
