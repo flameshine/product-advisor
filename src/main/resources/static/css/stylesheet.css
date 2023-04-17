@@ -1,3 +1,11 @@
 #recorder {
     height: 75vh
 }
+
+#startButton {
+    margin-right: 5px;
+}
+
+#stopButton {
+    margin-left: 5px;
+}
