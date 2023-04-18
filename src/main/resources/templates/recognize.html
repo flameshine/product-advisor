@@ -11,6 +11,7 @@
         <button id="stopButton" class="btn btn-dark mr-1">Stop</button>
     </div>
 </div>
+<div th:replace="~{/fragments/footer :: footer}"/>
 <!-- External import maps aren't yet supported -->
 <script type="importmap">
 {
@@ -19,7 +20,6 @@
   }
 }
 </script>
-<div th:replace="~{/fragments/footer :: footer}"/>
 <script type="module" src="/js/recorder.js"></script>
 </body>
 </html>
