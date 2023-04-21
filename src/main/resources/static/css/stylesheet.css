@@ -1,5 +1,6 @@
 #recorder {
-    height: 75vh
+    height: 75vh;
+    margin-top: 75px;
 }
 
 #startButton {

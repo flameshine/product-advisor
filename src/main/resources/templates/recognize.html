@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <div th:replace="~{/fragments/header :: header}"/>
 </head>
 <body>
 <div th:replace="~{/fragments/navigation-bar :: navigation-bar}"/>
 <div class="container">
-    <div id="recorder" class="d-flex justify-content-center align-items-center">
+    <div id="recorder" class="text-center">
         <button id="startButton" class="btn btn-dark mr-1">Start</button>
         <button id="stopButton" class="btn btn-dark mr-1">Stop</button>
     </div>
+    <div id="result">
+        <p th:if="${message}" th:utext="${message}"/>
+        <p th:if="${matched}" th:utext="${matched}"/>
+    </div>
 </div>
 <div th:replace="~{/fragments/footer :: footer}"/>
-<!-- External import maps aren't yet supported -->
+<!-- External import maps aren't supported at the time of writing -->
 <script type="importmap">
 {
   "imports": {
@@ -22,4 +25,3 @@
 </script>
 <script type="module" src="/js/recorder.js"></script>
 </body>
-</html>

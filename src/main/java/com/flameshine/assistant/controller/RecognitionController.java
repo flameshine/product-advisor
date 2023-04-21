@@ -1,8 +1,11 @@
 package com.flameshine.assistant.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import lombok.RequiredArgsConstructor;
 
 import com.flameshine.assistant.service.Recognizer;
@@ -21,18 +24,20 @@ public class RecognitionController {
         return Constants.RECOGNITION_PATH;
     }
 
-    @ResponseBody
+    // TODO: figure out why Thymeleaf displays the HTML page code
+
     @PostMapping(Constants.RECOGNITION_PATH)
-    public String recognize(
+    public ModelAndView recognize(
         @RequestParam("recording") MultipartFile recording
     ) {
+        var result = new ModelAndView(Constants.RECOGNITION_PATH);
         var keywords = recognizer.recognize(recording);
         var matched = matcher.match(keywords);
 
         if (matched.isEmpty()) {
-            return "No matching items found";
+            return result.addObject("message", "No matching items found");
         }
 
-        return matched.toString();
+        return result.addObject("matched", matched);
     }
 }
