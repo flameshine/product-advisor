@@ -1,17 +1,23 @@
 <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <div th:replace="~{/fragments/header :: header}"/>
 </head>
 <body>
 <div th:replace="~{/fragments/navigation-bar :: navigation-bar}"/>
 <div class="container">
-    <div id="recorder" class="text-center">
+    <div th:if="!${result}" id="recorder" class="text-center">
         <button id="startButton" class="btn btn-dark mr-1">Start</button>
         <button id="stopButton" class="btn btn-dark mr-1">Stop</button>
     </div>
-    <div id="result">
-        <p th:if="${message}" th:utext="${message}"/>
-        <p th:if="${matched}" th:utext="${matched}"/>
+</div>
+<div th:if="${result}">
+    <hr/>
+</div>
+<div class="container">
+    <div th:if="${result}" id="result" class="text-center">
+        <p th:text="${result}"/>
+        <a class="btn btn-dark mr-1" th:href="@{/recognize}">Retry</a>
     </div>
 </div>
 <div th:replace="~{/fragments/footer :: footer}"/>

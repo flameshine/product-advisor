@@ -2,9 +2,13 @@ import { webmToWav } from './converter.js'
 
 /**
  * We have to assign each window a unique UUID in order to support multiple users recording audios at the same time.
+ * Aside from that, we're setting the 'stop' button as inactive.
  */
 window.onload = () => {
+
     window.name = crypto.randomUUID();
+
+    stopButton.disabled = true;
 }
 
 const startButton = document.getElementById('startButton');
@@ -60,21 +64,7 @@ stopButton.addEventListener('click', () => {
                 body: data
             }).then((response) => {
                 response.text()
-                    .then((body) => {
-
-                        const container = document.createElement('div');
-
-                        container.setAttribute('class', 'text-center');
-
-                        const text = document.createTextNode(body);
-
-                        container.appendChild(text);
-
-                        document.body.appendChild(container);
-
-                        startButton.disabled = false;
-                        stopButton.disabled = true;
-                    })
+                    .then((text) => document.body.innerHTML = text)
                     .catch((error) => {
                         console.log(error);
                     });
@@ -83,4 +73,7 @@ stopButton.addEventListener('click', () => {
         .catch((error) => {
             console.log(error);
         });
+
+    startButton.disabled = false;
+    stopButton.disabled = true;
 });

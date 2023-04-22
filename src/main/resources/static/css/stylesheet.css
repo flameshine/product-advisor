@@ -1,6 +1,7 @@
 #recorder {
-    height: 75vh;
-    margin-top: 75px;
+    height: 5vh;
+    margin-top: 50px;
+    margin-bottom: 250px;
 }
 
 #startButton {
@@ -9,4 +10,8 @@
 
 #stopButton {
     margin-left: 5px;
+}
+
+#result {
+    margin-top: 250px;
 }
