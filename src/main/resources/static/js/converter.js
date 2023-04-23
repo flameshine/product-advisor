@@ -11,9 +11,10 @@ export function webmToWav(webmBlob) {
 
             const webmArrayBuffer = reader.result;
             const context = new AudioContext();
-            const decoder = context.decodeAudioData(webmArrayBuffer);
 
-            decoder.then((audioBuffer) => {
+            context.decodeAudioData(webmArrayBuffer)
+
+                .then((audioBuffer) => {
 
                 const channelData = audioBuffer.getChannelData(0);
                 const interleavedData = interleave(channelData);
