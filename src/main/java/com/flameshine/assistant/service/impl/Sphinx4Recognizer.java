@@ -1,10 +1,10 @@
 package com.flameshine.assistant.service.impl;
 
-import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.io.IOException;
+import java.io.UncheckedIOException;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,7 +32,7 @@ public class Sphinx4Recognizer implements Recognizer {
             SpeechResult speechResult;
 
             while ((speechResult = recognizer.getResult()) != null) {
-                keywords.add(speechResult.getHypothesis().toLowerCase());
+                keywords.add(speechResult.getHypothesis());
             }
 
         } catch (IOException e) {
