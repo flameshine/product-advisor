@@ -19,9 +19,7 @@ export function webmToWav(webmBlob) {
                     const interleavedData = interleave(channelData);
                     const wavData = encodeWav(interleavedData, audioBuffer.sampleRate);
 
-                    resolve(
-                        new Blob([wavData], { type: 'audio/wav' })
-                    );
+                    resolve(new Blob([wavData], { type: 'audio/wav' }));
 
                 }).catch((error) => {
                     reject(error);
