@@ -15,15 +15,17 @@ export function webmToWav(webmBlob) {
             context.decodeAudioData(webmArrayBuffer)
                 .then((audioBuffer) => {
 
-                const channelData = audioBuffer.getChannelData(0);
-                const interleavedData = interleave(channelData);
-                const wavData = encodeWav(interleavedData, audioBuffer.sampleRate);
+                    const channelData = audioBuffer.getChannelData(0);
+                    const interleavedData = interleave(channelData);
+                    const wavData = encodeWav(interleavedData, audioBuffer.sampleRate);
 
-                resolve(new Blob([wavData], { type: 'audio/wav' }));
+                    resolve(
+                        new Blob([wavData], { type: 'audio/wav' })
+                    );
 
-            }).catch((error) => {
-                reject(error);
-            });
+                }).catch((error) => {
+                    reject(error);
+                });
         };
 
         reader.readAsArrayBuffer(webmBlob);
