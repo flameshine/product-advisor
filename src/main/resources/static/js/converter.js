@@ -13,7 +13,6 @@ export function webmToWav(webmBlob) {
             const context = new AudioContext();
 
             context.decodeAudioData(webmArrayBuffer)
-
                 .then((audioBuffer) => {
 
                 const channelData = audioBuffer.getChannelData(0);
