@@ -19,8 +19,8 @@ import com.flameshine.assistant.util.Constants;
 @RequiredArgsConstructor
 public class RegistrationController {
 
-    private final Saver<User> saver;
     private final Validator validator;
+    private final Saver<User> saver;
 
     @GetMapping
     public ModelAndView registration() {
