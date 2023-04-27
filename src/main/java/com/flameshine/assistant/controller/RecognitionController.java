@@ -33,8 +33,11 @@ public class RecognitionController {
         var modelAndView = new ModelAndView(Constants.RECOGNITION_PATH);
         var keywords = recognizer.recognize(recording);
         var matched = matcher.match(keywords);
-        var result = matched.isEmpty() ? "No matching items found" : matched;
 
-        return modelAndView.addObject("result", result);
+        if (matched.isEmpty()) {
+            return modelAndView.addObject("message", "No matching items found");
+        }
+
+        return modelAndView.addObject("matched", matched);
     }
 }

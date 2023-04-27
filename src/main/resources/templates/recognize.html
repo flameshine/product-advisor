@@ -6,17 +6,53 @@
 <body>
 <div th:replace="~{/fragments/navigation-bar :: navigation-bar}"/>
 <div class="container">
-    <div th:if="!${result}" id="recorder" class="text-center">
+    <div th:if="!${matched}" id="recorder" class="text-center">
         <button id="startButton" class="btn btn-dark">Start</button>
         <button id="stopButton" class="btn btn-dark">Stop</button>
     </div>
 </div>
-<div th:if="${result}">
+<div th:if="${matched}">
     <hr/>
 </div>
 <div class="container">
-    <div th:if="${result}" id="result" class="text-center">
-        <p th:text="${result}"/>
+    <div th:if="${message}" class="text-center">
+        <p th:text="${message}"/>
+    </div>
+    <div th:if="${matched}" id="result" class="text-center">
+        <table class="table table-hover table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th scope="col">
+                    <p>Name</p>
+                </th>
+                <th scope="col">
+                    <p>Description</p>
+                </th>
+                <th scope="col">
+                    <p>Price</p>
+                </th>
+                <th scope="col">
+                    <p>Currency</p>
+                </th>
+                <th scope="col">
+                    <p>Quantity</p>
+                </th>
+                <th scope="col">
+                    <!-- Turn this into a real link -->
+                    <p>Action</p>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${matched}">
+                <td th:text="${item.getName()}"/>
+                <td th:text="${item.getDescription()}"/>
+                <td th:text="${item.getPrice()}"/>
+                <td th:text="${item.getCurrency()}"/>
+                <td th:text="${item.getQuantity()}"/>
+            </tr>
+            </tbody>
+        </table>
         <a class="btn btn-dark" th:href="@{/recognize}">Retry</a>
     </div>
 </div>
