@@ -12,6 +12,6 @@ public class LoginController {
 
     @GetMapping(Constants.LOGIN_PATH)
     public String login(Principal principal) {
-        return principal != null ? Constants.RECOGNITION_PATH : Constants.LOGIN_PATH;
+        return principal != null ? Constants.HOME_PATH : Constants.LOGIN_PATH;
     }
 }
