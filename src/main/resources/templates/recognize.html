@@ -14,11 +14,12 @@
 <div th:if="${matched}">
     <hr/>
 </div>
-<div class="container">
-    <div th:if="${message}" class="text-center">
-        <p th:text="${message}"/>
+<div class="container text-center">
+    <div th:if="${message}">
+        <h3 th:text="${message}"/>
+        <a class="btn btn-dark" th:href="@{/recognize}">Retry</a>
     </div>
-    <div th:if="${matched}" id="result" class="text-center">
+    <div th:if="${matched}" id="result">
         <table class="table table-hover table-bordered">
             <thead class="table-dark">
             <tr>
