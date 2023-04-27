@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.validation.Validator;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -22,11 +23,13 @@ import com.flameshine.assistant.validator.UserValidator;
 public class RegistrationController {
 
     private final Saver<User> saver;
-    private final UserValidator validator;
+    private final Validator validator;
 
     @InitBinder
     private void bindValidator(WebDataBinder binder) {
-        binder.setValidator(validator);
+        if (validator instanceof UserValidator) {
+            binder.setValidator(validator);
+        }
     }
 
     @GetMapping
