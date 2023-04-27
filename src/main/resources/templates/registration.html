@@ -6,7 +6,7 @@
 <body>
 <div th:replace="~{/fragments/navigation-bar :: navigation-bar}"/>
 <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col col-sm-8 col-md-6">
             <form autocomplete="off" action="#" th:action="@{/registration}" th:object="${user}" method="post">
                 <div class="form-label">
@@ -34,7 +34,7 @@
                     <input class="form-control" type="text" th:field="*{email}" placeholder="Email"/>
                 </div>
                 <div class="row">
-                    <div class="col-sm-3">
+                    <div class="text-center">
                         <input class="btn btn-dark" type="submit" value="Submit"/>
                     </div>
                 </div>

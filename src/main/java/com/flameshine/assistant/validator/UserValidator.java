@@ -1,6 +1,7 @@
 package com.flameshine.assistant.validator;
 
 import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Primary;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.NonNull;
 import com.flameshine.assistant.entity.User;
 
 @Component
+@Primary
 @RequiredArgsConstructor
 public class UserValidator implements Validator {
 
