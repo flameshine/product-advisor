@@ -23,22 +23,22 @@ public class Product implements Serializable {
     private Long id;
 
     @Column(name = "name", unique = true, nullable = false)
-    @NotBlank(message = "Product name is required")
+    @NotBlank(message = "{validation.product.name}")
     private String name;
 
     @Column(name = "description", unique = true, nullable = false)
-    @NotBlank(message = "Product description is required")
+    @NotBlank(message = "{validation.product.description}")
     private String description;
 
     @Column(name = "price", nullable = false)
-    @NotNull(message = "Price is required")
+    @NotNull(message = "{validation.product.price}")
     private BigDecimal price;
 
     @Column(name = "currency", nullable = false)
-    @NotNull(message = "Currency is required")
+    @NotNull(message = "{validation.product.currency}")
     private String currency;
 
     @Column(name = "quantity", nullable = false)
-    @NotNull(message = "Quantity is required")
+    @NotNull(message = "{validation.product.quantity}")
     private Integer quantity;
 }

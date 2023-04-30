@@ -1,1 +1,1 @@
-rootProject.name = "product-advisor-voice-assistant"
+rootProject.name = "product-advisor"

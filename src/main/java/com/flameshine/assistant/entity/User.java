@@ -26,30 +26,30 @@ public class User implements Serializable {
     private Long id;
 
     @Column(name = "username", unique = true, nullable = false)
-    @NotBlank(message = "Username is required")
-    @Length(min = 5, max = 15, message = "Username must be between 5 and 15 characters")
+    @NotBlank(message = "{validation.user.username.presence}")
+    @Length(min = 5, max = 15, message = "{validation.user.username.length}")
     private String username;
 
     @JsonIgnore
     @Column(name = "password", nullable = false)
-    @NotBlank(message = "Password is required")
-    @Length(min = 5, message = "Password must be greater than 5 characters")
+    @NotBlank(message = "{validation.user.password.presence}")
+    @Length(min = 5, message = "{validation.user.password.length}")
     private String password;
 
     @Transient
     @JsonIgnore
-    @NotBlank(message = "Password confirmation is required")
+    @NotBlank(message = "{validation.user.password-confirmation}")
     private String passwordConfirmation;
 
     @Column(name = "firstname", nullable = false)
-    @NotBlank(message = "First name is required")
+    @NotBlank(message = "{validation.user.firstname}")
     private String firstname;
 
     @Column(name = "lastname", nullable = false)
-    @NotBlank(message = "Last name is required")
+    @NotBlank(message = "{validation.user.lastname}")
     private String lastname;
 
     @Column(name = "email", unique = true, nullable = false)
-    @Email(message = "Invalid email")
+    @Email(message = "{validation.user.email}")
     private String email;
 }
