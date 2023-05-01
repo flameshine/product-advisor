@@ -7,7 +7,9 @@
 <div th:replace="~{/fragments/navigation-bar :: navigation-bar}"/>
 <div class="container">
     <div id="centralized" class="text-center">
-        <h2>An implementation of a simple voice assistant, which recognizes the input from the microphone and returns matched products from the database to purchase.</h2>
+        <h1 th:if="${message}" th:utext="${message}"/>
+        <h1 th:if="!${message}">Internal server error</h1>
+        <a class="btn btn-dark" th:href="@{/home}">Back</a>
     </div>
 </div>
 <div th:replace="~{/fragments/footer :: footer}"/>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="~{/fragments/header :: header}"/>
+</head>
+<body>
+<div th:replace="~{/fragments/navigation-bar :: navigation-bar}"/>
+<div class="container">
+    <h1>
+        <span th:text="${#authentication.getName()}"/>'s cart
+    </h1>
+    <div class="card" th:each="product : ${products.entrySet()}">
+        <div class="card-header">
+            <h1 th:text="${product.getKey().getName()}"/>
+            <h3 th:text="${product.getKey().getDescription()}"/>
+        </div>
+        <div class="row card-body">
+            <div class="col-md-2" th:inline="text">Price: [[${product.getKey().getPrice()}]] USD</div>
+            <div class="col-md-9" th:inline="text">Quantity: [[${product.getValue()}]]</div>
+            <a class="col-md-1" th:href="@{'/cart/remove/{id}'(id = ${product.getKey().getId()})}">
+                <button class="btn btn-dark" type="button">Remove</button>
+            </a>
+        </div>
+        <br/>
+    </div>
+    <div class="row card-body">
+        <h2 class="col-md-11" th:inline="text">Total: [[${total}]] USD</h2>
+        <a class="col-md-1" th:href="@{'/cart/checkout'}">
+            <button class="btn btn-danger" type="button">Checkout</button>
+        </a>
+    </div>
+</div>
+<div th:replace="~{/fragments/footer :: footer}"/>
+</body>
+</html>

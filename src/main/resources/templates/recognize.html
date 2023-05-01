@@ -51,6 +51,11 @@
                 <td th:text="${item.getPrice()}"/>
                 <td th:text="${item.getCurrency()}"/>
                 <td th:text="${item.getQuantity()}"/>
+                <td>
+                    <a class="col-md-1" th:href="@{'/cart/add/{id}'(id = ${item.getId()})}" th:if="${item.getQuantity()} > 0">
+                        <button class="btn btn-dark" type="button">Buy</button>
+                    </a>
+                </td>
             </tr>
             </tbody>
         </table>

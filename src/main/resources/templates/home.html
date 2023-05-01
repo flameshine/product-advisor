@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <div th:replace="/fragments/header :: header"/>
+    <div th:replace="~{/fragments/header :: header}"/>
 </head>
 <body>
-<div th:replace="/fragments/navigation-bar :: navigation-bar"/>
+<div th:replace="~{/fragments/navigation-bar :: navigation-bar}"/>
 <div class="container">
-    <h1 id="home" class="text-center">
+    <h1 id="centralized" class="text-center">
         <span th:text="${#authentication.getName()}"/>'s home
     </h1>
 </div>
-<div th:replace="/fragments/footer :: footer"/>
+<div th:replace="~{/fragments/footer :: footer}"/>
 </body>
 </html>

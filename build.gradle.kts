@@ -27,6 +27,7 @@ dependencies {
     implementation("net.sf.phat:sphinx4-data:$sphinxVersion")
     implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE")
     implementation("mysql:mysql-connector-java:8.0.32")
+    implementation("com.google.guava:guava:31.1-jre")
 
     compileOnly("org.projectlombok:lombok:$lombokVersion")
 
