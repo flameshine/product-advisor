@@ -14,7 +14,7 @@ import com.flameshine.assistant.service.Matcher;
 import com.flameshine.assistant.util.Constants;
 
 @Controller
-@RequestMapping(Constants.RECOGNITION_PATH)
+@RequestMapping(Constants.RECOGNIZE_PATH)
 @RequiredArgsConstructor
 public class RecognitionController {
 
@@ -23,14 +23,14 @@ public class RecognitionController {
 
     @GetMapping
     public String recognize() {
-        return Constants.RECOGNITION_PATH;
+        return Constants.RECOGNIZE_PATH;
     }
 
     @PostMapping
     public ModelAndView recognize(
         @RequestParam("recording") MultipartFile recording
     ) {
-        var modelAndView = new ModelAndView(Constants.RECOGNITION_PATH);
+        var modelAndView = new ModelAndView(Constants.RECOGNIZE_PATH);
         var keywords = recognizer.recognize(recording);
         var matched = matcher.match(keywords);
 
