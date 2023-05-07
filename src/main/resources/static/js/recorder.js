@@ -2,7 +2,7 @@ import { webmToWav } from './converter.js'
 
 const startButton = document.getElementById('startButton');
 const stopButton = document.getElementById('stopButton');
-const canvas = document.getElementById('visualizer');
+const visualizer = document.getElementById('visualizer');
 const audioContext = new AudioContext();
 
 /**
@@ -47,22 +47,19 @@ startButton.addEventListener('click', () => {
             const source = audioContext.createMediaStreamSource(stream);
 
             analyzer = audioContext.createAnalyser();
-
             analyzer.fftSize = 2048;
-
             bufferLength = analyzer.frequencyBinCount;
             dataArray = new Uint8Array(bufferLength);
 
             source.connect(analyzer);
 
-            canvasContext = canvas.getContext('2d');
-
-            canvas.width = 1000;
-            canvas.height = 250;
+            canvasContext = visualizer.getContext('2d');
+            visualizer.width = 1000;
+            visualizer.height = 175;
 
             visualize();
 
-            mediaRecorder.start(1000);
+            mediaRecorder.start(500);
         })
         .catch((error) => {
             console.log(error);
@@ -94,30 +91,25 @@ function visualize() {
 
     analyzer.getByteTimeDomainData(dataArray);
 
-    canvasContext.fillStyle = 'rgb(200, 200, 200)';
+    canvasContext.fillStyle = '#ffffff';
+    canvasContext.strokeStyle = '#229c34';
 
-    canvasContext.fillRect(0, 0, canvas.width, canvas.height);
-
-    canvasContext.lineWidth = 2;
-    canvasContext.strokeStyle = 'rgb(0, 0, 0)';
-
+    canvasContext.fillRect(0, 0, visualizer.width, visualizer.height);
     canvasContext.beginPath();
 
-    const sliceWidth = canvas.width / bufferLength;
+    const sliceWidth = visualizer.width / bufferLength;
 
-    let x = 0;
-
-    for (let i = 0; i < bufferLength; ++i) {
+    for (let i = 0, x = 0; i < bufferLength; ++i) {
 
         const v = dataArray[i] / 128.0;
-        const y = v * canvas.height / 2;
+        const y = v * visualizer.height / 2;
 
         i === 0 ? canvasContext.moveTo(x, y) : canvasContext.lineTo(x, y);
 
         x += sliceWidth;
     }
 
-    canvasContext.lineTo(canvas.width, canvas.height / 2);
+    canvasContext.lineTo(visualizer.width, visualizer.height / 2);
     canvasContext.stroke();
 }
 
