@@ -23,9 +23,11 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    implementation("org.springframework.cloud:spring-cloud-gcp-starter:1.2.8.RELEASE")
+    implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE")
     implementation("net.sf.phat:sphinx4-core:$sphinxVersion")
     implementation("net.sf.phat:sphinx4-data:$sphinxVersion")
-    implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE")
+    implementation("com.google.cloud:google-cloud-speech:4.11.0")
     implementation("mysql:mysql-connector-java:8.0.32")
     implementation("com.google.guava:guava:31.1-jre")
 

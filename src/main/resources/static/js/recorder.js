@@ -18,12 +18,6 @@ window.onload = () => {
 
 const WEBM_MEDIA_TYPE = 'audio/webm';
 
-const AUDIO_FORMAT_PROPERTIES = {
-    autoGainControl: false,
-    echoCancellation: false,
-    noiseSuppression: false
-};
-
 let mediaRecorder;
 let recordedChunks;
 let analyzer;
@@ -35,7 +29,7 @@ startButton.addEventListener('click', () => {
 
     recordedChunks = [];
 
-    navigator.mediaDevices.getUserMedia({ audio: AUDIO_FORMAT_PROPERTIES })
+    navigator.mediaDevices.getUserMedia({ audio: true })
         .then(stream => {
 
             mediaRecorder = new MediaRecorder(stream, { mimeType: WEBM_MEDIA_TYPE });
@@ -88,7 +82,6 @@ stopButton.addEventListener('click', () => {
 function visualize() {
 
     requestAnimationFrame(visualize);
-
     analyzer.getByteTimeDomainData(dataArray);
 
     canvasContext.fillStyle = '#ffffff';

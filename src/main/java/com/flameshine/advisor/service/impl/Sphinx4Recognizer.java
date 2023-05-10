@@ -16,6 +16,7 @@ import com.flameshine.advisor.service.Recognizer;
 
 @Service
 @RequiredArgsConstructor
+@Deprecated
 public class Sphinx4Recognizer implements Recognizer {
 
     private final StreamSpeechRecognizer recognizer;

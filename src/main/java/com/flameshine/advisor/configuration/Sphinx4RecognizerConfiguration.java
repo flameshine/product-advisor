@@ -2,15 +2,17 @@ package com.flameshine.advisor.configuration;
 
 import java.io.IOException;
 
-import edu.cmu.sphinx.api.StreamSpeechRecognizer;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import edu.cmu.sphinx.api.StreamSpeechRecognizer;
 
 @Configuration
-public class RecognizerConfiguration {
+@Deprecated
+public class Sphinx4RecognizerConfiguration {
 
+    private final Integer sampleRate;
     private final String acousticModel;
     private final String languageModel;
     private final String dictionaryPath;
@@ -18,13 +20,15 @@ public class RecognizerConfiguration {
     private final String grammarName;
 
     @Autowired
-    public RecognizerConfiguration(
-        @Value("${recognition.acoustic-model}") String acousticModel,
-        @Value("${recognition.language-model}") String languageModel,
-        @Value("${recognition.dictionary-path}") String dictionaryPath,
-        @Value("${recognition.grammar-path}") String grammarPath,
-        @Value("${recognition.grammar-name}") String grammarName
+    public Sphinx4RecognizerConfiguration(
+        @Value("${recognizer.sphinx4.sample-rate}") Integer sampleRate,
+        @Value("${recognizer.sphinx4.acoustic-model}") String acousticModel,
+        @Value("${recognizer.sphinx4.language-model}") String languageModel,
+        @Value("${recognizer.sphinx4.dictionary-path}") String dictionaryPath,
+        @Value("${recognizer.sphinx4.grammar-path}") String grammarPath,
+        @Value("${recognizer.sphinx4.grammar-name}") String grammarName
     ) {
+        this.sampleRate = sampleRate;
         this.acousticModel = acousticModel;
         this.languageModel = languageModel;
         this.dictionaryPath = dictionaryPath;
@@ -34,14 +38,10 @@ public class RecognizerConfiguration {
 
     @Bean
     public StreamSpeechRecognizer liveSpeechRecognizer() throws IOException {
-        return new StreamSpeechRecognizer(configuration());
-    }
-
-    @Bean
-    public edu.cmu.sphinx.api.Configuration configuration() {
 
         var configuration = new edu.cmu.sphinx.api.Configuration();
 
+        configuration.setSampleRate(sampleRate);
         configuration.setAcousticModelPath(acousticModel);
         configuration.setLanguageModelPath(languageModel);
         configuration.setDictionaryPath(dictionaryPath);
@@ -49,6 +49,6 @@ public class RecognizerConfiguration {
         configuration.setGrammarName(grammarName);
         configuration.setUseGrammar(true);
 
-        return configuration;
+        return new StreamSpeechRecognizer(configuration);
     }
 }
