@@ -42,6 +42,8 @@ public class GoogleRecognizer implements Recognizer {
 
         } catch (IOException e) {
             throw new UncheckedIOException(e);
+        } finally {
+            speechClient.close();
         }
     }
 }

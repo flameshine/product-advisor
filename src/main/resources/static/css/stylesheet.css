@@ -24,3 +24,7 @@ body, nav {
 #visualizer {
     margin-bottom: 50px;
 }
+
+#cart-summary {
+    margin-top: 35px;
+}
