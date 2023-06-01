@@ -54,10 +54,8 @@ public class CartOperatorImpl implements CartOperator {
     public void checkout() {
 
         for (var productEntry : products.entrySet()) {
-
             var productFromCart = productEntry.getKey();
             var productFromDb = retrieveAndValidateById(productFromCart.getId());
-
             productFromCart.setQuantity(productFromDb.getQuantity() - productEntry.getValue());
         }
 

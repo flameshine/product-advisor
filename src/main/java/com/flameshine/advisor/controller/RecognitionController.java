@@ -1,5 +1,7 @@
 package com.flameshine.advisor.controller;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,13 +33,15 @@ public class RecognitionController {
         @RequestParam("recording") MultipartFile recording
     ) {
         var modelAndView = new ModelAndView(Constants.RECOGNIZE_PATH);
-        var keywords = recognizer.recognize(recording);
-        var matched = matcher.match(keywords);
 
-        if (matched.isEmpty()) {
-            return modelAndView.addObject("message", "No matching items found");
-        }
+        Optional.ofNullable(recording)
+            .map(recognizer::recognize)
+            .map(matcher::match)
+            .ifPresentOrElse(
+                matched -> modelAndView.addObject("matched", matched),
+                () -> modelAndView.addObject("message", "No matching items found")
+            );
 
-        return modelAndView.addObject("matched", matched);
+        return modelAndView;
     }
 }
