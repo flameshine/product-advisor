@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 
 // TODO: document everything
 // TODO: employ AWS Lambda to conduct media-files conversion
+// TODO: consider switching to AWS Transcribe
 
 @SpringBootApplication
 public class Application {
