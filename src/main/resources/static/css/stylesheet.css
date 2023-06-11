@@ -2,6 +2,11 @@ body, nav {
     background-image: linear-gradient(-90deg, #97c74a, #229c34);
 }
 
+#navigation-bar a:hover {
+    transform: scale(1.2);
+    color: white;
+}
+
 #centralized {
     margin-top: 200px;
     margin-bottom: 200px;
