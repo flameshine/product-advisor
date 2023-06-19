@@ -17,6 +17,10 @@ import com.flameshine.advisor.service.CartOperator;
 import com.flameshine.advisor.repository.ProductRepository;
 import com.flameshine.advisor.entity.Product;
 
+/**
+ * Implementation of the {@link CartOperator}.
+ */
+
 @Service
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class CartOperatorImpl implements CartOperator {

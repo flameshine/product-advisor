@@ -10,6 +10,10 @@ import lombok.RequiredArgsConstructor;
 import com.flameshine.advisor.service.CartOperator;
 import com.flameshine.advisor.util.Constants;
 
+/**
+ * Controller for the "/cart" page, which allows a user to interact with purchased products.
+ */
+
 @Controller
 @RequestMapping(Constants.CART_PATH)
 @RequiredArgsConstructor

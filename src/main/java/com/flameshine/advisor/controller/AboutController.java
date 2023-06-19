@@ -5,6 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.flameshine.advisor.util.Constants;
 
+/**
+ * Controller for the "/about" page, which represents a brief description of the application itself.
+ */
+
 @Controller
 public class AboutController {
 

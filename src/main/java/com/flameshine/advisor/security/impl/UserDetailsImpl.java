@@ -9,6 +9,10 @@ import org.springframework.security.core.GrantedAuthority;
 
 import com.flameshine.advisor.entity.User;
 
+/**
+ * Represents the particular user through the prism of application security.
+ */
+
 public record UserDetailsImpl(User user) implements UserDetails {
 
     @Serial

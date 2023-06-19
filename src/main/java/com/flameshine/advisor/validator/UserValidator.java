@@ -9,6 +9,10 @@ import lombok.NonNull;
 
 import com.flameshine.advisor.entity.User;
 
+/**
+ * Validator for {@link User}.
+ */
+
 @Component
 @Primary
 @RequiredArgsConstructor

@@ -10,6 +10,10 @@ import com.flameshine.advisor.repository.ProductRepository;
 import com.flameshine.advisor.entity.Product;
 import com.flameshine.advisor.service.Matcher;
 
+/**
+ * Implementation of the {@link Matcher} that interacts with products.
+ */
+
 @Service
 @Transactional
 @RequiredArgsConstructor

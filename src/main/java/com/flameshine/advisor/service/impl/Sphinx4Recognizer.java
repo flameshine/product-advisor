@@ -14,6 +14,10 @@ import lombok.RequiredArgsConstructor;
 
 import com.flameshine.advisor.service.Recognizer;
 
+/**
+ * Implementation of the {@link Recognizer} that employs Sphinx4 speech recognition library.
+ */
+
 @Service
 @RequiredArgsConstructor
 @Deprecated

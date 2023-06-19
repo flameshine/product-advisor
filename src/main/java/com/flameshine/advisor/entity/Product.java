@@ -9,6 +9,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+/**
+ * Entity that represents products data.
+ */
+
 @Entity
 @Table(name = "product")
 @Data

@@ -5,6 +5,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
+/**
+ * Configures sources for input forms validation messages.
+ */
+
 @Configuration
 public class ValidationConfiguration {
 

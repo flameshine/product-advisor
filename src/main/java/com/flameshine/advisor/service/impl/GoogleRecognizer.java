@@ -16,6 +16,10 @@ import lombok.RequiredArgsConstructor;
 
 import com.flameshine.advisor.service.Recognizer;
 
+/**
+ * Implementation of the {@link Recognizer} that employs GCP Speech-to-Text service.
+ */
+
 @Service
 @Primary
 @RequiredArgsConstructor

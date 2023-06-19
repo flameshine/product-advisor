@@ -9,6 +9,10 @@ import lombok.RequiredArgsConstructor;
 
 import com.flameshine.advisor.repository.UserRepository;
 
+/**
+ * Service that retrieves a user from database by its username and instantiates the {@link UserDetailsImpl} for authentication.
+ */
+
 @Service
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {

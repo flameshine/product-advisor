@@ -9,6 +9,10 @@ import com.flameshine.advisor.entity.User;
 import com.flameshine.advisor.repository.UserRepository;
 import com.flameshine.advisor.service.Saver;
 
+/**
+ * Implementation of the {@link Saver} that interacts with users.
+ */
+
 @Service
 @Transactional
 @RequiredArgsConstructor

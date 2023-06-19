@@ -15,6 +15,10 @@ import com.flameshine.advisor.service.Recognizer;
 import com.flameshine.advisor.service.Matcher;
 import com.flameshine.advisor.util.Constants;
 
+/**
+ * Controller for the "/recognize" page, that provides functionality of products selection using a voice assistant.
+ */
+
 @Controller
 @RequestMapping(Constants.RECOGNIZE_PATH)
 @RequiredArgsConstructor

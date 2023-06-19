@@ -11,6 +11,10 @@ import org.hibernate.validator.constraints.Length;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Entity that represents users data.
+ */
+
 @Entity
 @Table(name = "user")
 @Data

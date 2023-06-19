@@ -8,6 +8,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import edu.cmu.sphinx.api.StreamSpeechRecognizer;
 
+/**
+ * Configuration for Sphinx4 recognizer.
+ * @deprecated Use {@link GoogleRecognizerConfiguration} with the corresponding recognizer, as it provides significantly higher accuracy.
+ */
+
 @Configuration
 @Deprecated
 public class Sphinx4RecognizerConfiguration {

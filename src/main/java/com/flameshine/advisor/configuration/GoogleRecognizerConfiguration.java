@@ -14,6 +14,10 @@ import com.google.cloud.speech.v1.SpeechSettings;
 import com.google.cloud.speech.v1.SpeechClient;
 import com.google.cloud.speech.v1.RecognitionConfig;
 
+/**
+ * Configuration class for GCP Speech-to-Text client.
+ */
+
 @Configuration
 public class GoogleRecognizerConfiguration {
 

@@ -9,6 +9,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.flameshine.advisor.entity.Product;
 
+/**
+ * Spring Data JPA repository for interacting with the {@link Product} entity.
+ */
+
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 

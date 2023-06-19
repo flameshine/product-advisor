@@ -3,6 +3,10 @@ package com.flameshine.advisor.util;
 import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
 
+/**
+ * A utility class, that contains constants shared across the application.
+ */
+
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class Constants {
 

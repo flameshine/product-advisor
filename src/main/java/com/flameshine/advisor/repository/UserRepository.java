@@ -7,6 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import com.flameshine.advisor.entity.User;
 
+/**
+ * Spring Data JPA repository for interacting with the {@link User} entity.
+ */
+
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUsername(String username);

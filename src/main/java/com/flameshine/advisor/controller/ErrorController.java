@@ -7,6 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 
 import com.flameshine.advisor.util.Constants;
 
+/**
+ * Error controller, which intercepts all exceptions and properly handles them.
+ */
+
 @ControllerAdvice
 @Slf4j
 public class ErrorController {

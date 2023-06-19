@@ -14,6 +14,10 @@ import com.flameshine.advisor.entity.User;
 import com.flameshine.advisor.service.Saver;
 import com.flameshine.advisor.util.Constants;
 
+/**
+ * Controller for the "/registration" path, which allows users to register a new account.
+ */
+
 @Controller
 @RequestMapping(Constants.REGISTRATION_PATH)
 @RequiredArgsConstructor

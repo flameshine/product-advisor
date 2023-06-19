@@ -17,6 +17,10 @@ import lombok.RequiredArgsConstructor;
 
 import com.flameshine.advisor.util.Constants;
 
+/**
+ * Configuration that manages application security.
+ */
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
