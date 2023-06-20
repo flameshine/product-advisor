@@ -1,7 +1,6 @@
-// TODO: Move to a CDK project
-// TODO: Verify and integrate the functionality
-
 exports.handler = async (event, context) => {
+
+    // TODO: remove this after testing
 
     console.log(`AWS request id: ${context.awsRequestId}; Event: ${JSON.stringify(event)}`)
 
@@ -24,7 +23,7 @@ exports.handler = async (event, context) => {
     }
 }
 
-export function webmToWav(webmBlob) {
+function webmToWav(webmBlob) {
     const reader = new FileReaderSync();
     const webmArrayBuffer = reader.readAsArrayBuffer(webmBlob);
     const context = new AudioContext();

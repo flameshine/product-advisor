@@ -4,6 +4,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.SpringApplication;
 
 // TODO: finish AWS Lambda integration for conducting media-files conversion
+// TODO: switch to the maintainable Node version in the CDK project
 // TODO: consider trying AWS Transcribe
 // TODO: implement functionality of interacting using voice through the entire application flow
 // TODO: add traditional methods of interacting with the web-site
