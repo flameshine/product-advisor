@@ -16,15 +16,11 @@ export class ApiGatewayStack extends Stack {
         const conversionLambdaAuthorizerArn = Fn.importValue('conversion-lambda-authorizer');
         const conversionLambdaAuthorizer = Function.fromFunctionArn(this, 'ConversionLambdaAuthorizer', conversionLambdaAuthorizerArn);
 
-        // TODO: fix deployment issues related to the authorizer
-
         api.addRoutes({
             path: '/convert',
             methods: [ HttpMethod.POST ],
             integration: conversionLambdaIntegration,
-            authorizer: new HttpLambdaAuthorizer('ConversionLambdaTokenAuthorizer', conversionLambdaAuthorizer,{
-                identitySource: [ 'method.request.header.authorization' ],
-            }),
+            authorizer: new HttpLambdaAuthorizer('ConversionLambdaTokenAuthorizer', conversionLambdaAuthorizer),
         })
     }
 }

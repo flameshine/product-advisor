@@ -28,7 +28,7 @@ dependencies {
     implementation("net.sf.phat:sphinx4-core:$sphinxVersion")
     implementation("net.sf.phat:sphinx4-data:$sphinxVersion")
     implementation("com.google.cloud:google-cloud-speech:4.11.0")
-    implementation("mysql:mysql-connector-java:8.0.32")
+    implementation("mysql:mysql-connector-java:8.0.33")
     implementation("com.google.guava:guava:31.1-jre")
 
     compileOnly("org.projectlombok:lombok:$lombokVersion")

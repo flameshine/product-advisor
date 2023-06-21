@@ -1,8 +1,9 @@
-// TODO: store secrets securely
+import { buildBasicAuthorizationHeader } from '../../util/authorization';
+
+// TODO: store credentials securely
 
 const USERNAME = 'conversion-lambda';
 const PASSWORD = '45b68ced29d2301f84908bfa5370ad6cc600b758';
-const AUTHORIZATION_HEADER = USERNAME + ':' + PASSWORD;
 
 exports.handler = async (event, context, callback) => {
 
@@ -10,7 +11,7 @@ exports.handler = async (event, context, callback) => {
 
     console.log(`AWS request id: ${context.awsRequestId}; Event: ${JSON.stringify(event)}`)
 
-    const expected = `Basic ${new Buffer(AUTHORIZATION_HEADER).toString('base64')}`;
+    const expected = buildBasicAuthorizationHeader(USERNAME, PASSWORD);
 
     if (expected === event.request.headers.authorization) {
         return callback(null, event);
