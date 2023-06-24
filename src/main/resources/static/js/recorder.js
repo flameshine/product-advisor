@@ -68,7 +68,8 @@ STOP_BUTTON.addEventListener('click', () => {
     const webmBlob = new Blob(recordedChunks, { type: WEBM_MEDIA_TYPE });
 
     retrieveConvertedBlob(webmBlob)
-        .then((response) => submitResult(response));
+        .then((response) => submitResult(response))
+        .catch((error) => console.log(error));
 
     START_BUTTON.disabled = false;
     STOP_BUTTON.disabled = true;
@@ -105,7 +106,7 @@ function retrieveConvertedBlob(blob) {
 
     // TODO: store credentials securely
 
-    const conversionLambdaEndpoint = 'https://e88fuidk6i.execute-api.us-east-1.amazonaws.com/convert';
+    const conversionLambdaUrl = 'https://g4igxlfmo8.execute-api.us-east-1.amazonaws.com/convert';
     const username = 'conversion-lambda';
     const password = '45b68ced29d2301f84908bfa5370ad6cc600b758';
 
@@ -117,7 +118,7 @@ function retrieveConvertedBlob(blob) {
         }
     };
 
-    return fetch(conversionLambdaEndpoint, httpRequestProperties)
+    return fetch(conversionLambdaUrl, httpRequestProperties)
         .catch((error) => console.log(error));
 }
 

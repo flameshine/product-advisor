@@ -1,6 +1,7 @@
-import { Stack, StackProps, Duration, CfnOutput } from 'aws-cdk-lib';
+import { CfnOutput, Duration, Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { Function, Code, Runtime } from 'aws-cdk-lib/aws-lambda';
+import { Code, Function, Runtime } from 'aws-cdk-lib/aws-lambda';
+import { RetentionDays } from 'aws-cdk-lib/aws-logs';
 
 export class LambdaStack extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
@@ -12,7 +13,8 @@ export class LambdaStack extends Stack {
             handler: 'handler',
             memorySize: 512,
             runtime: Runtime.NODEJS_18_X,
-            timeout: Duration.minutes(1)
+            timeout: Duration.minutes(1),
+            logRetention: RetentionDays.ONE_DAY,
         });
 
         new CfnOutput(this, 'ConversionLambdaHandlerOutput', {
@@ -26,7 +28,8 @@ export class LambdaStack extends Stack {
             handler: 'handler',
             memorySize: 128,
             runtime: Runtime.NODEJS_18_X,
-            timeout: Duration.seconds(30)
+            timeout: Duration.seconds(30),
+            logRetention: RetentionDays.ONE_DAY,
         });
 
         new CfnOutput(this, 'ConversionLambdaAuthorizerOutput', {

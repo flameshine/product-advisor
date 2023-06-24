@@ -1,13 +1,13 @@
 exports.handler = async (event, context) => {
 
-    // TODO: remove this after testing
-
     console.log(`AWS request id: ${context.awsRequestId}; Event: ${JSON.stringify(event)}`)
 
     try {
 
         const webmBlob = new Blob(event.buffer);
         const result = webmToWav(webmBlob);
+
+        console.log(`Result size: ${result.size}`);
 
         return {
             statusCode: 200,

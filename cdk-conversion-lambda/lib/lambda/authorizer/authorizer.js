@@ -7,8 +7,6 @@ const PASSWORD = '45b68ced29d2301f84908bfa5370ad6cc600b758';
 
 exports.handler = async (event, context, callback) => {
 
-    // TODO: remove this after testing
-
     console.log(`AWS request id: ${context.awsRequestId}; Event: ${JSON.stringify(event)}`)
 
     const expected = buildBasicAuthorizationHeader(USERNAME, PASSWORD);

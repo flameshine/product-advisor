@@ -9,7 +9,10 @@ export class ApiGatewayStack extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props);
 
-        const api = new HttpApi(this, 'ConversionLambdaHttpApi');
+        const api = new HttpApi(this, 'ConversionLambdaHttpApi', {
+            apiName: 'conversion-lambda-http-api',
+        });
+
         const conversionLambdaHandlerArn = Fn.importValue('conversion-lambda-handler');
         const conversionLambdaHandler = Function.fromFunctionArn(this, 'ConversionLambdaHandler', conversionLambdaHandlerArn);
         const conversionLambdaIntegration = new HttpLambdaIntegration('ConversionLambdaIntegration', conversionLambdaHandler);
@@ -20,7 +23,7 @@ export class ApiGatewayStack extends Stack {
             path: '/convert',
             methods: [ HttpMethod.POST ],
             integration: conversionLambdaIntegration,
-            authorizer: new HttpLambdaAuthorizer('ConversionLambdaTokenAuthorizer', conversionLambdaAuthorizer),
+            authorizer: new HttpLambdaAuthorizer('ConversionLambdaAuthorizer', conversionLambdaAuthorizer),
         })
     }
 }
