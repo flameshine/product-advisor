@@ -1,6 +1,20 @@
+import { buildBasicAuthorizationHeader } from '../../util/authorization';
+
+const USERNAME = 'conversion-lambda';
+const PASSWORD = '45b68ced29d2301f84908bfa5370ad6cc600b758';
+
 exports.handler = async (event, context) => {
 
-    console.log(`AWS request id: ${context.awsRequestId}; Event: ${JSON.stringify(event)}`)
+    console.log(`AWS request id: ${context.awsRequestId}; Event: ${JSON.stringify(event)}`);
+
+    const expectedAuthorizationHeader = buildBasicAuthorizationHeader(USERNAME, PASSWORD);
+
+    if (expectedAuthorizationHeader !== event.request.headers.authorization) {
+        return {
+            statusCode: 403,
+            body: 'Unauthorized'
+        }
+    }
 
     try {
 

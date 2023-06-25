@@ -19,22 +19,7 @@ export class LambdaStack extends Stack {
 
         new CfnOutput(this, 'ConversionLambdaHandlerOutput', {
             value: conversionLambdaFunction.functionArn,
-            exportName: 'conversion-lambda-handler',
-        });
-
-        new Function(this, 'ConversionLambdaAuthorizer', {
-            code: Code.fromAsset('lib/lambda/authorizer'),
-            functionName: 'ConversionLambdaAuthorizer',
-            handler: 'handler',
-            memorySize: 128,
-            runtime: Runtime.NODEJS_18_X,
-            timeout: Duration.seconds(30),
-            logRetention: RetentionDays.ONE_DAY,
-        });
-
-        new CfnOutput(this, 'ConversionLambdaAuthorizerOutput', {
-            value: conversionLambdaFunction.functionArn,
-            exportName: 'conversion-lambda-authorizer',
+            exportName: 'conversion-lambda-handler-arn',
         });
     }
 }

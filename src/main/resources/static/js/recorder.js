@@ -106,7 +106,7 @@ function retrieveConvertedBlob(blob) {
 
     // TODO: store credentials securely
 
-    const conversionLambdaUrl = 'https://g4igxlfmo8.execute-api.us-east-1.amazonaws.com/convert';
+    const conversionLambdaUrl = 'https://ekmly9et05.execute-api.us-east-1.amazonaws.com/convert';
     const username = 'conversion-lambda';
     const password = '45b68ced29d2301f84908bfa5370ad6cc600b758';
 
