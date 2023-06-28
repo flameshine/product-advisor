@@ -10,7 +10,7 @@ export class LambdaStack extends Stack {
         const conversionLambdaFunction = new Function(this, 'ConversionLambdaHandler', {
             code: Code.fromAsset('lib/lambda/handler'),
             functionName: 'ConversionLambda',
-            handler: 'handler',
+            handler: 'conversion.handler',
             memorySize: 512,
             runtime: Runtime.NODEJS_18_X,
             timeout: Duration.minutes(1),
