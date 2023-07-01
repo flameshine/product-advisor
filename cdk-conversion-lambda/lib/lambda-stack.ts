@@ -8,7 +8,7 @@ export class LambdaStack extends Stack {
         super(scope, id, props);
 
         const conversionLambdaFunction = new Function(this, 'ConversionLambdaHandler', {
-            code: Code.fromAsset('lib/lambda/handler'),
+            code: Code.fromAsset('src'),
             functionName: 'ConversionLambda',
             handler: 'conversion.handler',
             memorySize: 512,

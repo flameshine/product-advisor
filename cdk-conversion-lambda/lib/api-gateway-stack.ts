@@ -3,6 +3,7 @@ import { Construct } from 'constructs';
 import { Function } from 'aws-cdk-lib/aws-lambda';
 import { HttpApi, HttpMethod } from '@aws-cdk/aws-apigatewayv2-alpha';
 import { HttpLambdaIntegration } from '@aws-cdk/aws-apigatewayv2-integrations-alpha';
+import {Cors} from "aws-cdk-lib/aws-apigateway";
 
 export class ApiGatewayStack extends Stack {
 
@@ -11,6 +12,9 @@ export class ApiGatewayStack extends Stack {
 
         const api = new HttpApi(this, 'ConversionLambdaHttpApi', {
             apiName: 'conversion-lambda-http-api',
+            corsPreflight: {
+                allowOrigins: Cors.ALL_ORIGINS,
+            }
         });
 
         const conversionLambdaHandlerArn = Fn.importValue('conversion-lambda-handler-arn');

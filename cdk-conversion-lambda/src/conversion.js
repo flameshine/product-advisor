@@ -1,10 +1,8 @@
-// TODO: build ZIP file with all dependencies
-
 'use strict';
 
 const { Blob } = require('node:buffer');
 const { AudioContext } = require('web-audio-api');
-const { buildBasicAuthorizationHeader } = require('../../util/authorization');
+const { buildBasicAuthorizationHeader } = require('./util/authorization');
 
 const USERNAME = 'conversion-lambda';
 const PASSWORD = '45b68ced29d2301f84908bfa5370ad6cc600b758';
@@ -15,7 +13,7 @@ exports.handler = async(event) => {
 
     const expectedAuthorizationHeader = buildBasicAuthorizationHeader(USERNAME, PASSWORD);
 
-    if (expectedAuthorizationHeader !== event.request.headers.authorization) {
+    if (expectedAuthorizationHeader !== event.headers.authorization) {
         return {
             statusCode: 403,
             body: 'Unauthorized'

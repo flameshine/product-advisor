@@ -1,0 +1,9 @@
+{
+  "name": "src",
+  "version": "1.0.0",
+  "main": "conversion.js",
+  "license": "ISC",
+  "dependencies": {
+    "web-audio-api": "^0.2.2"
+  }
+}

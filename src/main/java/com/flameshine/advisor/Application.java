@@ -4,6 +4,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.SpringApplication;
 
 // TODO: fix the cdk-conversion-lambda errors
+// TODO: switch to async approach in JS part
 // TODO: add README
 // TODO: consider trying AWS Transcribe
 // TODO: implement functionality of interacting using voice through the entire application flow

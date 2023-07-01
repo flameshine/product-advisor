@@ -1,3 +1,5 @@
+// TODO: switch to async approach
+
 const START_BUTTON = document.getElementById('startButton');
 const STOP_BUTTON = document.getElementById('stopButton');
 const VISUALIZER = document.getElementById('visualizer');
@@ -61,13 +63,13 @@ START_BUTTON.addEventListener('click', () => {
     STOP_BUTTON.disabled = false;
 });
 
-STOP_BUTTON.addEventListener('click', () => {
+STOP_BUTTON.addEventListener('click', async () => {
 
     mediaRecorder.stop();
 
-    const webmBlob = new Blob(recordedChunks, { type: WEBM_MEDIA_TYPE });
+    const webmBlob = new Blob(recordedChunks, {type: WEBM_MEDIA_TYPE});
 
-    retrieveConvertedBlob(webmBlob)
+    await retrieveConvertedBlob(webmBlob)
         .then((response) => submitResult(response))
         .catch((error) => console.log(error));
 
@@ -102,19 +104,19 @@ function visualize() {
     canvasContext.stroke();
 }
 
-function retrieveConvertedBlob(blob) {
+async function retrieveConvertedBlob(blob) {
 
     // TODO: store credentials securely
 
-    const conversionLambdaUrl = 'https://ekmly9et05.execute-api.us-east-1.amazonaws.com/convert';
+    const conversionLambdaUrl = 'https://0c57y1czqc.execute-api.us-east-1.amazonaws.com/convert';
     const username = 'conversion-lambda';
     const password = '45b68ced29d2301f84908bfa5370ad6cc600b758';
 
     const httpRequestProperties = {
         method: 'POST',
-        body: blob,
+        body: await blob.arrayBuffer(),
         headers: {
-            "Authorization": buildBasicAuthorizationHeader(username, password),
+            'Authorization': buildBasicAuthorizationHeader(username, password),
         }
     };
 
