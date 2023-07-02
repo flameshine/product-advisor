@@ -8,14 +8,14 @@ import org.springframework.web.servlet.ModelAndView;
 import lombok.RequiredArgsConstructor;
 
 import com.flameshine.advisor.service.CartOperator;
-import com.flameshine.advisor.util.Constants;
+import com.flameshine.advisor.util.WebPaths;
 
 /**
  * Controller for the "/cart" page, which allows a user to interact with purchased products.
  */
 
 @Controller
-@RequestMapping(Constants.CART_PATH)
+@RequestMapping(WebPaths.CART)
 @RequiredArgsConstructor
 public class CartController {
 
@@ -23,7 +23,7 @@ public class CartController {
 
     @GetMapping
     public ModelAndView cart() {
-        return new ModelAndView(Constants.CART_PATH)
+        return new ModelAndView(WebPaths.CART)
             .addObject("products", operator.products())
             .addObject("total", operator.total());
     }

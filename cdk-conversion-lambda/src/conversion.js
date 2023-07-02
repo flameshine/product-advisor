@@ -1,42 +1,44 @@
 'use strict';
 
-const { Blob } = require('node:buffer');
+const { Blob } = require('node-blob');
 const { AudioContext } = require('web-audio-api');
 const { buildBasicAuthorizationHeader } = require('./util/authorization');
 
 const USERNAME = 'conversion-lambda';
 const PASSWORD = '45b68ced29d2301f84908bfa5370ad6cc600b758';
 
-exports.handler = async(event) => {
+exports.handler = async (event) => {
 
     console.log(`Event: ${JSON.stringify(event)}`);
 
     const expectedAuthorizationHeader = buildBasicAuthorizationHeader(USERNAME, PASSWORD);
 
-    if (expectedAuthorizationHeader !== event.headers.authorization) {
+    if (event.headers && expectedAuthorizationHeader !== event.headers.authorization) {
         return {
             statusCode: 403,
-            body: 'Unauthorized'
+            body: 'Unauthorized',
         };
     }
 
     try {
 
-        const webmBlob = new Blob(event.buffer);
+        const buffer = Buffer.from(event.body, 'base64');
+        const arrayBuffer = buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength);
+        const webmBlob = new Blob(arrayBuffer, 'audio/webm');
         const result = webmToWav(webmBlob);
 
         console.log(`Result size: ${result.size}`);
 
         return {
             statusCode: 200,
-            body: result,
+            body: JSON.stringify(result),
         };
 
     } catch (error) {
         console.log(error);
         return {
             statusCode: 500,
-            body: 'An unexpected error has occurred'
+            body: 'An unexpected error has occurred',
         };
     }
 };

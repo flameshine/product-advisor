@@ -15,7 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import lombok.RequiredArgsConstructor;
 
-import com.flameshine.advisor.util.Constants;
+import com.flameshine.advisor.util.WebPaths;
 
 /**
  * Configuration that manages application security.
@@ -34,14 +34,14 @@ public class SecurityConfiguration {
         return http.csrf()
             .disable()
             .authorizeHttpRequests()
-            .requestMatchers("/css/**", "/js/**", Constants.REGISTRATION_PATH, Constants.ERROR_PATH)
+            .requestMatchers("/css/**", "/js/**", WebPaths.REGISTRATION, WebPaths.ERROR)
             .permitAll()
             .anyRequest()
             .authenticated()
             .and()
             .formLogin()
-            .loginPage(Constants.LOGIN_PATH)
-            .defaultSuccessUrl(Constants.HOME_PATH)
+            .loginPage(WebPaths.LOGIN)
+            .defaultSuccessUrl(WebPaths.HOME)
             .permitAll()
             .and()
             .logout()

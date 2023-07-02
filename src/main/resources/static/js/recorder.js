@@ -1,9 +1,8 @@
-// TODO: switch to async approach
+// TODO: switch to the async approach
 
 const START_BUTTON = document.getElementById('startButton');
 const STOP_BUTTON = document.getElementById('stopButton');
 const VISUALIZER = document.getElementById('visualizer');
-const AUDIO_CONTEXT = new AudioContext();
 
 /**
  * We have to assign each window a unique UUID in order to support multiple users recording audios at the same time.
@@ -38,9 +37,10 @@ START_BUTTON.addEventListener('click', () => {
                 recordedChunks.push(event.data);
             };
 
-            const source = AUDIO_CONTEXT.createMediaStreamSource(stream);
+            const audioContext = new AudioContext();
+            const source = audioContext.createMediaStreamSource(stream);
 
-            analyzer = AUDIO_CONTEXT.createAnalyser();
+            analyzer = audioContext.createAnalyser();
             analyzer.fftSize = 2048;
             bufferLength = analyzer.frequencyBinCount;
             dataArray = new Uint8Array(bufferLength);
@@ -104,24 +104,39 @@ function visualize() {
     canvasContext.stroke();
 }
 
-async function retrieveConvertedBlob(blob) {
+async function retrieveConvertedBlob(webmBlob) {
 
     // TODO: store credentials securely
 
-    const conversionLambdaUrl = 'https://0c57y1czqc.execute-api.us-east-1.amazonaws.com/convert';
+    const conversionLambdaUrl = 'https://re75p9fghj.execute-api.us-east-1.amazonaws.com/convert';
     const username = 'conversion-lambda';
     const password = '45b68ced29d2301f84908bfa5370ad6cc600b758';
+    const webmBlobBase64String = await blobToBase64(webmBlob);
+
+    console.log(JSON.stringify(webmBlobBase64String));
 
     const httpRequestProperties = {
         method: 'POST',
-        body: await blob.arrayBuffer(),
+        body: JSON.stringify(webmBlobBase64String),
         headers: {
+            'Content-Type': 'application/json',
             'Authorization': buildBasicAuthorizationHeader(username, password),
         }
     };
 
     return fetch(conversionLambdaUrl, httpRequestProperties)
         .catch((error) => console.log(error));
+}
+
+async function blobToBase64(blob) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+
+        reader.onloadend = () => resolve(reader.result);
+        reader.onerror = (error) => reject(error);
+
+        reader.readAsDataURL(blob);
+    });
 }
 
 function buildBasicAuthorizationHeader(username, password) {

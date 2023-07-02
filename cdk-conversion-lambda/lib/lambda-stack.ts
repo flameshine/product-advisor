@@ -2,12 +2,13 @@ import { CfnOutput, Duration, Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { Code, Function, Runtime } from 'aws-cdk-lib/aws-lambda';
 import { RetentionDays } from 'aws-cdk-lib/aws-logs';
+import { ServicePrincipal } from "aws-cdk-lib/aws-iam";
 
 export class LambdaStack extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props);
 
-        const conversionLambdaFunction = new Function(this, 'ConversionLambdaHandler', {
+        const conversionLambdaHandler = new Function(this, 'ConversionLambdaHandler', {
             code: Code.fromAsset('src'),
             functionName: 'ConversionLambda',
             handler: 'conversion.handler',
@@ -17,8 +18,12 @@ export class LambdaStack extends Stack {
             logRetention: RetentionDays.ONE_DAY,
         });
 
+        conversionLambdaHandler.grantInvoke(
+            new ServicePrincipal('apigateway.amazonaws.com')
+        );
+
         new CfnOutput(this, 'ConversionLambdaHandlerOutput', {
-            value: conversionLambdaFunction.functionArn,
+            value: conversionLambdaHandler.functionArn,
             exportName: 'conversion-lambda-handler-arn',
         });
     }

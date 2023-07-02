@@ -12,14 +12,14 @@ import lombok.RequiredArgsConstructor;
 
 import com.flameshine.advisor.entity.User;
 import com.flameshine.advisor.service.Saver;
-import com.flameshine.advisor.util.Constants;
+import com.flameshine.advisor.util.WebPaths;
 
 /**
  * Controller for the "/registration" path, which allows users to register a new account.
  */
 
 @Controller
-@RequestMapping(Constants.REGISTRATION_PATH)
+@RequestMapping(WebPaths.REGISTRATION)
 @RequiredArgsConstructor
 public class RegistrationController {
 
@@ -28,7 +28,7 @@ public class RegistrationController {
 
     @GetMapping
     public ModelAndView registration() {
-        return new ModelAndView(Constants.REGISTRATION_PATH)
+        return new ModelAndView(WebPaths.REGISTRATION)
             .addObject("user", new User());
     }
 
@@ -38,12 +38,12 @@ public class RegistrationController {
         validator.validate(user, result);
 
         if (result.hasErrors()) {
-            return new ModelAndView(Constants.REGISTRATION_PATH);
+            return new ModelAndView(WebPaths.REGISTRATION);
         }
 
         saver.save(user);
 
-        return new ModelAndView(Constants.LOGIN_PATH)
+        return new ModelAndView(WebPaths.LOGIN)
             .addObject("message", "User has been registered successfully");
     }
 }

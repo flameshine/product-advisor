@@ -4,6 +4,7 @@
   "main": "conversion.js",
   "license": "ISC",
   "dependencies": {
+    "node-blob": "^0.0.2",
     "web-audio-api": "^0.2.2"
   }
 }
