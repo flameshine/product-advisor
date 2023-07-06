@@ -108,7 +108,7 @@ async function retrieveConvertedBlob(webmBlob) {
 
     // TODO: store credentials securely
 
-    const conversionLambdaUrl = 'https://re75p9fghj.execute-api.us-east-1.amazonaws.com/convert';
+    const conversionLambdaUrl = 'https://re75p9fghj.execute-api.us-east-1.amazonaws.com/v1/convert';
     const username = 'conversion-lambda';
     const password = '45b68ced29d2301f84908bfa5370ad6cc600b758';
     const webmBlobBase64String = await blobToBase64(webmBlob);

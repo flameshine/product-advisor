@@ -22,7 +22,7 @@ export class ApiGatewayStack extends Stack {
         const conversionLambdaHandler = Function.fromFunctionArn(this, 'ConversionLambdaHandler', conversionLambdaHandlerArn);
 
         api.addRoutes({
-            path: '/convert',
+            path: '/v1/convert',
             methods: [HttpMethod.POST],
             integration: new HttpLambdaIntegration('ConversionLambdaIntegration', conversionLambdaHandler),
         });
