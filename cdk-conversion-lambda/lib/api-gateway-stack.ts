@@ -14,7 +14,7 @@ export class ApiGatewayStack extends Stack {
             corsPreflight: {
                 allowOrigins: Cors.ALL_ORIGINS,
                 allowHeaders: Cors.DEFAULT_HEADERS,
-                allowMethods: [CorsHttpMethod.POST],
+                allowMethods: [CorsHttpMethod.POST]
             },
         });
 
@@ -24,7 +24,7 @@ export class ApiGatewayStack extends Stack {
         api.addRoutes({
             path: '/v1/convert',
             methods: [HttpMethod.POST],
-            integration: new HttpLambdaIntegration('ConversionLambdaIntegration', conversionLambdaHandler),
+            integration: new HttpLambdaIntegration('ConversionLambdaIntegration', conversionLambdaHandler)
         });
     }
 }

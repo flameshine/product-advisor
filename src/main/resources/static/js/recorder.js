@@ -1,4 +1,4 @@
-// TODO: switch to the async approach
+// TODO: switch to the fully asynchronous approach
 
 const START_BUTTON = document.getElementById('startButton');
 const STOP_BUTTON = document.getElementById('stopButton');
@@ -108,16 +108,14 @@ async function retrieveConvertedBlob(webmBlob) {
 
     // TODO: store credentials securely
 
-    const conversionLambdaUrl = 'https://re75p9fghj.execute-api.us-east-1.amazonaws.com/v1/convert';
+    const conversionLambdaUrl = 'https://ye8esa3285.execute-api.us-east-1.amazonaws.com/v1/convert';
     const username = 'conversion-lambda';
     const password = '45b68ced29d2301f84908bfa5370ad6cc600b758';
     const webmBlobBase64String = await blobToBase64(webmBlob);
 
-    console.log(JSON.stringify(webmBlobBase64String));
-
     const httpRequestProperties = {
         method: 'POST',
-        body: JSON.stringify(webmBlobBase64String),
+        body: webmBlobBase64String,
         headers: {
             'Content-Type': 'application/json',
             'Authorization': buildBasicAuthorizationHeader(username, password),
@@ -125,14 +123,15 @@ async function retrieveConvertedBlob(webmBlob) {
     };
 
     return fetch(conversionLambdaUrl, httpRequestProperties)
+        .then(async (response) => new Blob([await response.arrayBuffer()], {type: 'audio/wav'}))
         .catch((error) => console.log(error));
 }
 
-async function blobToBase64(blob) {
+function blobToBase64(blob) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
 
-        reader.onloadend = () => resolve(reader.result);
+        reader.onloadend = () => resolve(reader.result.split(',')[1]);
         reader.onerror = (error) => reject(error);
 
         reader.readAsDataURL(blob);
@@ -151,7 +150,7 @@ function submitResult(result) {
 
     data.append('recording', result, 'recording.wav');
 
-    fetch('/recognize', {
+    fetch('/advise', {
         method: 'POST',
         body: data
     }).then((response) => {
