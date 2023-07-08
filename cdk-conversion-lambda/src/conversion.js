@@ -8,7 +8,7 @@ const { buildBasicAuthorizationHeader } = require('./util/authorization');
 const USERNAME = 'conversion-lambda';
 const PASSWORD = '45b68ced29d2301f84908bfa5370ad6cc600b758';
 
-// TODO: investigate the behaviour
+// TODO: Solve 'io.grpc.StatusRuntimeException: INVALID_ARGUMENT: Must use single channel (mono) audio, but WAV header indicates 1 channels.'
 
 exports.handler = async (event) => {
 
