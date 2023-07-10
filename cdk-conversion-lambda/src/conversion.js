@@ -58,11 +58,11 @@ function convertWebmToWav(webmBuffer) {
         const buffers = [];
 
         outputStream.on('data', (chunk) => buffers.push(chunk));
-        outputStream.on('end', () => resolve(Buffer.concat(buffers)));
+        outputStream.on('finish', () => resolve(Buffer.concat(buffers)));
 
         ffmpeg()
-            .input(readableStream)
             .inputFormat('webm')
+            .input(readableStream)
             .toFormat('wav')
             .output(outputStream)
             .on('error', (error) => reject(error))

@@ -1,5 +1,8 @@
 // TODO: switch to the fully asynchronous approach
 
+import { blobToBase64, base64toBlob } from './util/base64.js';
+import { buildBasicAuthorizationHeader } from './util/authorization.js';
+
 const START_BUTTON = document.getElementById('startButton');
 const STOP_BUTTON = document.getElementById('stopButton');
 const VISUALIZER = document.getElementById('visualizer');
@@ -108,7 +111,7 @@ async function retrieveConvertedBlob(webmBlob) {
 
     // TODO: store credentials securely
 
-    const conversionLambdaUrl = 'https://ye8esa3285.execute-api.us-east-1.amazonaws.com/v1/convert';
+    const conversionLambdaUrl = 'https://wtlprmb2hc.execute-api.us-east-1.amazonaws.com/v1/convert';
     const username = 'conversion-lambda';
     const password = '45b68ced29d2301f84908bfa5370ad6cc600b758';
     const webmBlobBase64String = await blobToBase64(webmBlob);
@@ -122,26 +125,18 @@ async function retrieveConvertedBlob(webmBlob) {
         }
     };
 
+    // TODO: cleanup
+
     return fetch(conversionLambdaUrl, httpRequestProperties)
-        .then(async (response) => new Blob([await response.arrayBuffer()], {type: 'audio/wav'}))
+        .then(async (response) => {
+            console.log(response);
+            return await response.text();
+        })
+        .then((responseBody) => {
+            console.log(responseBody);
+            return base64toBlob(responseBody, 'audio/wav');
+        })
         .catch((error) => console.log(error));
-}
-
-function blobToBase64(blob) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-
-        reader.onloadend = () => resolve(reader.result.split(',')[1]);
-        reader.onerror = (error) => reject(error);
-
-        reader.readAsDataURL(blob);
-    });
-}
-
-function buildBasicAuthorizationHeader(username, password) {
-    const token = username + ':' + password;
-    const encodedToken = btoa(token);
-    return `Basic ${encodedToken}`;
 }
 
 function submitResult(result) {
