@@ -8,8 +8,6 @@ const { buildBasicAuthorizationHeader } = require('./util/authorization');
 const USERNAME = 'conversion-lambda';
 const PASSWORD = '45b68ced29d2301f84908bfa5370ad6cc600b758';
 
-// TODO: Solve 'io.grpc.StatusRuntimeException: INVALID_ARGUMENT: Must use single channel (mono) audio, but WAV header indicates 1 channels.'
-
 exports.handler = async (event) => {
 
     console.log(`Event: ${event.body}`);
@@ -33,8 +31,7 @@ exports.handler = async (event) => {
 
         return {
             statusCode: 200,
-            body: responseBody,
-            isBase64Encoded: true
+            body: responseBody
         };
 
     } catch (error) {
@@ -61,8 +58,8 @@ function convertWebmToWav(webmBuffer) {
         outputStream.on('finish', () => resolve(Buffer.concat(buffers)));
 
         ffmpeg()
-            .inputFormat('webm')
             .input(readableStream)
+            .inputFormat('webm')
             .toFormat('wav')
             .output(outputStream)
             .on('error', (error) => reject(error))

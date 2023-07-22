@@ -11,9 +11,9 @@ export function blobToBase64(blob) {
 
 export function base64toBlob(base64Data, contentType) {
 
-    const sliceSize = 512;
     const byteCharacters = atob(base64Data);
     const byteArrays = [];
+    const sliceSize = 512;
 
     for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
 

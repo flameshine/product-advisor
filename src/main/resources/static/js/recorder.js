@@ -12,9 +12,7 @@ const VISUALIZER = document.getElementById('visualizer');
  * Aside from that, we're setting the 'stop' button as inactive.
  */
 window.onload = () => {
-
     window.name = crypto.randomUUID();
-
     STOP_BUTTON.disabled = true;
 }
 
@@ -111,7 +109,7 @@ async function retrieveConvertedBlob(webmBlob) {
 
     // TODO: store credentials securely
 
-    const conversionLambdaUrl = 'https://wtlprmb2hc.execute-api.us-east-1.amazonaws.com/v1/convert';
+    const conversionLambdaUrl = 'https://zg423dyo8h.execute-api.us-east-1.amazonaws.com/v1/convert';
     const username = 'conversion-lambda';
     const password = '45b68ced29d2301f84908bfa5370ad6cc600b758';
     const webmBlobBase64String = await blobToBase64(webmBlob);
@@ -125,17 +123,9 @@ async function retrieveConvertedBlob(webmBlob) {
         }
     };
 
-    // TODO: cleanup
-
     return fetch(conversionLambdaUrl, httpRequestProperties)
-        .then(async (response) => {
-            console.log(response);
-            return await response.text();
-        })
-        .then((responseBody) => {
-            console.log(responseBody);
-            return base64toBlob(responseBody, 'audio/wav');
-        })
+        .then(async (response) => await response.text())
+        .then((responseBody) => base64toBlob(responseBody, 'audio/wav'))
         .catch((error) => console.log(error));
 }
 
