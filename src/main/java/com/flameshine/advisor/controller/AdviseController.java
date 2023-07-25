@@ -1,6 +1,8 @@
 package com.flameshine.advisor.controller;
 
+import java.util.Collection;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +43,7 @@ public class AdviseController {
         Optional.ofNullable(recording)
             .map(recognizer::recognize)
             .map(matcher::match)
+            .filter(Predicate.not(Collection::isEmpty))
             .ifPresentOrElse(
                 matched -> modelAndView.addObject("matched", matched),
                 () -> modelAndView.addObject("message", "No matching items found")

@@ -1,7 +1,6 @@
-// TODO: switch to the fully asynchronous approach
-
 import { blobToBase64, base64toBlob } from './util/base64.js';
 import { buildBasicAuthorizationHeader } from './util/authorization.js';
+import { WEBM, WAV } from './util/media-types.js';
 
 const START_BUTTON = document.getElementById('startButton');
 const STOP_BUTTON = document.getElementById('stopButton');
@@ -16,7 +15,11 @@ window.onload = () => {
     STOP_BUTTON.disabled = true;
 }
 
-const WEBM_MEDIA_TYPE = 'audio/webm';
+// TODO: store credentials securely
+
+const CONVERSION_ENDPOINT = 'https://b4ouf4uuu2.execute-api.us-east-1.amazonaws.com/v1/convert';
+const USERNAME = 'conversion-lambda';
+const PASSWORD = '45b68ced29d2301f84908bfa5370ad6cc600b758';
 
 let mediaRecorder;
 let recordedChunks;
@@ -32,7 +35,7 @@ START_BUTTON.addEventListener('click', () => {
     navigator.mediaDevices.getUserMedia({ audio: true })
         .then(stream => {
 
-            mediaRecorder = new MediaRecorder(stream, { mimeType: WEBM_MEDIA_TYPE });
+            mediaRecorder = new MediaRecorder(stream, { mimeType: WEBM });
 
             mediaRecorder.ondataavailable = (event) => {
                 recordedChunks.push(event.data);
@@ -68,11 +71,14 @@ STOP_BUTTON.addEventListener('click', async () => {
 
     mediaRecorder.stop();
 
-    const webmBlob = new Blob(recordedChunks, {type: WEBM_MEDIA_TYPE});
+    const webmBlob = new Blob(recordedChunks, { type: WEBM });
 
-    await retrieveConvertedBlob(webmBlob)
-        .then((response) => submitResult(response))
-        .catch((error) => console.log(error));
+    try {
+        const response = await retrieveConvertedBlob(webmBlob);
+        await submitResult(response);
+    } catch (error) {
+        console.log(error);
+    }
 
     START_BUTTON.disabled = false;
     STOP_BUTTON.disabled = true;
@@ -107,11 +113,6 @@ function visualize() {
 
 async function retrieveConvertedBlob(webmBlob) {
 
-    // TODO: store credentials securely
-
-    const conversionLambdaUrl = 'https://zg423dyo8h.execute-api.us-east-1.amazonaws.com/v1/convert';
-    const username = 'conversion-lambda';
-    const password = '45b68ced29d2301f84908bfa5370ad6cc600b758';
     const webmBlobBase64String = await blobToBase64(webmBlob);
 
     const httpRequestProperties = {
@@ -119,14 +120,17 @@ async function retrieveConvertedBlob(webmBlob) {
         body: webmBlobBase64String,
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': buildBasicAuthorizationHeader(username, password),
+            'Authorization': buildBasicAuthorizationHeader(USERNAME, PASSWORD),
         }
     };
 
-    return fetch(conversionLambdaUrl, httpRequestProperties)
-        .then(async (response) => await response.text())
-        .then((responseBody) => base64toBlob(responseBody, 'audio/wav'))
-        .catch((error) => console.log(error));
+    try {
+        const response = await fetch(CONVERSION_ENDPOINT, httpRequestProperties);
+        const responseBody = await response.text();
+        return base64toBlob(responseBody, WAV);
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 function submitResult(result) {
