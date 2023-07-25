@@ -1,9 +1,8 @@
 # product-advisor
 
-An implementation of a simple voice assistant, which recognizes the input from the microphone and returns matched products from the database to purchase.
-In addition, the system provides support for user authentication and registration.
+An implementation of a simple voice assistant, which recognizes the input from the microphone and returns matched products from the database to purchase. In addition, the system provides support for user authentication and registration.
 
-Basically, the project was created for educational purposes.
+Basically, the project was created for *educational* purposes.
 
 Technologies involved:
 
@@ -15,4 +14,4 @@ Technologies involved:
 - Front-end: HTML, CSS, Bootstrap 5, Thymeleaf
 - Auxiliary: Guava, Lombok
 
-The CDK part description can be found here: [source](../cdk-conversion-lambda/README.md).
+The CDK part description can be found here: [source](../cdk-conversion-lambda/README.md)
