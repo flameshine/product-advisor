@@ -15,4 +15,4 @@ Technologies involved:
 - Front-end: HTML, CSS, Bootstrap 5, Thymeleaf
 - Auxiliary: Guava, Lombok
 
-The CDK part description can be found here: link [https://github.com/flameshine/product-advisor/blob/8dc7a4e91b934a7fee93a39b2bffcad6d10ec1a1/cdk-conversion-lambda/README.md].
+The CDK part description can be found here: [source] (https://github.com/flameshine/product-advisor/blob/8dc7a4e91b934a7fee93a39b2bffcad6d10ec1a1/cdk-conversion-lambda/README.md).
