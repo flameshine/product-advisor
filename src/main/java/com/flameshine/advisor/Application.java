@@ -3,8 +3,6 @@ package com.flameshine.advisor;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.SpringApplication;
 
-// TODO: add README
-// TODO: consider trying AWS Transcribe
 // TODO: implement functionality of interacting using voice through the entire application flow
 // TODO: add traditional methods of interacting with the web-site
 
